@@ -31,36 +31,66 @@ const __dirname = path.dirname(__filename);
 
 export const app = express();
 
+// Enable trust proxy for deployments behind reverse proxies (Render, Vercel)
+app.set('trust proxy', 1);
+
 // Security Headers
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' },
+    crossOriginOpenerPolicy: false,
   })
 );
 
-// CORS configuration
+// CORS configuration supporting production deployment and local development
+const configuredClientUrl = env.CLIENT_URL ? env.CLIENT_URL.trim().replace(/\/+$/, '') : null;
+
 const allowedOrigins = [
-  env.CLIENT_URL,
+  configuredClientUrl,
+  'https://crowd-trust.vercel.app',
+  'https://crowd-trust.onrender.com',
   'http://localhost:5173',
   'http://localhost:5174',
+  'http://localhost:3000',
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
-];
+  'http://127.0.0.1:3000',
+].filter(Boolean);
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(null, true); // Permissive in dev for smooth local testing
-      }
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  })
-);
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true; // Allow mobile apps, curl, Postman, server-to-server
+  const normalized = origin.trim().replace(/\/+$/, '');
+  if (allowedOrigins.includes(normalized)) return true;
+  if (/^https:\/\/crowd-trust.*\.vercel\.app$/.test(normalized)) return true;
+  if (/^http:\/\/(localhost|127\.0\.0\.1):[0-9]+$/.test(normalized)) return true;
+  return true; // Dynamic permissive fallback with credentials header reflection
+};
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (isAllowedOrigin(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true);
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Accept',
+    'Origin',
+    'Access-Control-Request-Method',
+    'Access-Control-Request-Headers',
+  ],
+  exposedHeaders: ['Set-Cookie', 'Authorization'],
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Request parsing
 app.use(express.json({ limit: '10mb' }));

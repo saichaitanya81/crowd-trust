@@ -12,12 +12,13 @@ const generateToken = (id) => {
 
 const sendTokenResponse = (user, statusCode, res, message = 'Success') => {
   const token = generateToken(user._id);
+  const isProduction = env.NODE_ENV === 'production';
 
   const cookieOptions = {
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
     httpOnly: true,
-    secure: env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
   };
 
   res.cookie('jwt', token, cookieOptions);
@@ -97,9 +98,12 @@ export const login = async (req, res, next) => {
 };
 
 export const logout = (req, res) => {
+  const isProduction = env.NODE_ENV === 'production';
   res.cookie('jwt', 'loggedout', {
-    expires: new Date(Date.now() + 10 * 1000),
+    expires: new Date(0),
     httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
   });
   return sendSuccess(res, 200, 'Logged out successfully');
 };

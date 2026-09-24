@@ -20,8 +20,13 @@ export const AuthProvider = ({ children }) => {
 
       try {
         const res = await api.get('/auth/me');
-        if (res.success && res.data.user) {
-          setUser(res.data.user);
+        const userObj = res?.data?.user || res?.user;
+        if (userObj) {
+          setUser(userObj);
+        } else {
+          localStorage.removeItem('crowdtrust_token');
+          setToken(null);
+          setUser(null);
         }
       } catch (err) {
         console.warn('Session expired or invalid token:', err.message);
@@ -39,13 +44,17 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const res = await api.post('/auth/login', { email, password });
-      if (res.success && res.token) {
-        localStorage.setItem('crowdtrust_token', res.token);
-        setToken(res.token);
-        setUser(res.data.user);
-        success(`Welcome back, ${res.data.user.name}!`);
-        return { success: true, user: res.data.user };
+      const userObj = res?.data?.user || res?.user;
+      const authToken = res?.token || res?.data?.token;
+
+      if (authToken && userObj) {
+        localStorage.setItem('crowdtrust_token', authToken);
+        setToken(authToken);
+        setUser(userObj);
+        success(`Welcome back, ${userObj.name}!`);
+        return { success: true, user: userObj };
       }
+      return { success: false, error: res?.message || 'Login failed' };
     } catch (err) {
       error(err.message);
       return { success: false, error: err.message };
@@ -55,13 +64,17 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const res = await api.post('/auth/register', userData);
-      if (res.success && res.token) {
-        localStorage.setItem('crowdtrust_token', res.token);
-        setToken(res.token);
-        setUser(res.data.user);
+      const userObj = res?.data?.user || res?.user;
+      const authToken = res?.token || res?.data?.token;
+
+      if (authToken && userObj) {
+        localStorage.setItem('crowdtrust_token', authToken);
+        setToken(authToken);
+        setUser(userObj);
         success('Account created successfully! Welcome to CrowdTrust.');
-        return { success: true, user: res.data.user };
+        return { success: true, user: userObj };
       }
+      return { success: false, error: res?.message || 'Registration failed' };
     } catch (err) {
       error(err.message);
       return { success: false, error: err.message };
@@ -84,11 +97,13 @@ export const AuthProvider = ({ children }) => {
   const updateProfile = async (updates) => {
     try {
       const res = await api.patch('/auth/profile', updates);
-      if (res.success && res.data.user) {
-        setUser(res.data.user);
+      const userObj = res?.data?.user || res?.user;
+      if (userObj) {
+        setUser(userObj);
         success('Profile updated successfully.');
-        return { success: true, user: res.data.user };
+        return { success: true, user: userObj };
       }
+      return { success: false, error: res?.message || 'Profile update failed' };
     } catch (err) {
       error(err.message);
       return { success: false, error: err.message };
@@ -102,14 +117,16 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       const res = await api.post(`/auth/bookmarks/${campaignId}`);
-      if (res.success) {
+      if (res?.success) {
+        const updatedBookmarks = res.data?.bookmarks || res.bookmarks || [];
         setUser((prev) => ({
           ...prev,
-          bookmarks: res.data.bookmarks,
+          bookmarks: updatedBookmarks,
         }));
         success(res.message);
-        return res.data.isBookmarked;
+        return res.data?.isBookmarked ?? res.isBookmarked;
       }
+      return false;
     } catch (err) {
       error(err.message);
       return false;

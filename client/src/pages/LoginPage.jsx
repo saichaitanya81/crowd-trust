@@ -115,7 +115,7 @@ export const LoginPage = () => {
 
               <button
                 type="button"
-                onClick={() => handleQuickLogin('dr.ananya@lifelinecare.org', 'Creator@12345#')}
+                onClick={() => handleQuickLogin('aisha@ruralhealth.org', 'Creator@12345#')}
                 className="p-2.5 rounded-xl bg-teal-950/40 hover:bg-teal-900/60 border border-teal-800/60 text-teal-300 text-center transition"
               >
                 <Stethoscope className="w-4 h-4 text-teal-400 mx-auto mb-1" />
@@ -124,7 +124,7 @@ export const LoginPage = () => {
 
               <button
                 type="button"
-                onClick={() => handleQuickLogin('priya.sharma@gmail.com', 'Donor@12345#')}
+                onClick={() => handleQuickLogin('priya@example.com', 'Donor@12345#')}
                 className="p-2.5 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-800/60 text-emerald-300 text-center transition"
               >
                 <HeartHandshake className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
