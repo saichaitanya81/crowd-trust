@@ -1,0 +1,14 @@
+{
+  "name": "crowdtrust-root",
+  "version": "1.0.0",
+  "description": "CrowdTrust - Verified, Transparent, Impactful Crowdfunding Platform",
+  "private": true,
+  "scripts": {
+    "dev": "node -e \"console.log('Run npm run dev:server and npm run dev:client in separate terminals or use concurrently')\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build",
+    "seed": "cd server && npm run seed",
+    "test:server": "cd server && npm test"
+  }
+}
