@@ -197,35 +197,49 @@ export const HomePage = () => {
     >
       <div className="space-y-20 pb-20 overflow-hidden bg-[#F7F0E3] text-[#3A2418]">
         {/* 1. Hero Section */}
-        <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32 overflow-hidden border-b border-[#DCCBB5]">
+        <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32 overflow-hidden border-b border-[#DCCBB5] bg-[#F7F0E3]">
           {/* Background Image Layer */}
           <img
             src="/images/crowdtrust-hero-bg.png"
-            alt=""
+            alt="CrowdTrust community empowerment background"
             aria-hidden="true"
             loading="eager"
-            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0 opacity-45 select-none"
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0 opacity-55 select-none"
           />
 
-          {/* Warm Cream / Almond Theme Overlay */}
+          {/* Warm Cream / Almond Gradient Overlay */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-[#FBF7EF]/90 via-[#F7F0E3]/92 to-[#F7F0E3]"
+            className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-[#FBF7EF]/80 via-[#F7F0E3]/85 to-[#F7F0E3]/95"
+          />
+
+          {/* Decorative Subtle Organic Accents (Behind Content) */}
+          <div
+            aria-hidden="true"
+            className="absolute top-10 left-1/2 -translate-x-1/2 w-[720px] h-[380px] bg-radial from-[#C96F4A]/10 via-[#E8D5B7]/25 to-transparent rounded-full blur-3xl pointer-events-none z-[1]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute -bottom-12 -left-20 w-80 h-80 bg-radial from-[#E8D5B7]/40 via-transparent to-transparent rounded-full blur-2xl pointer-events-none z-[1]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute -top-10 -right-16 w-80 h-80 bg-radial from-[#C96F4A]/12 via-transparent to-transparent rounded-full blur-2xl pointer-events-none z-[1]"
           />
 
           {/* Hero Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[2] text-center">
-            {/* Trust Pill */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F0DDC7] border border-[#D6BFA0] shadow-sm mb-6 text-xs font-bold text-[#7A452F] animate-fade-in">
+            {/* Trust Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8D5B7] border border-[#D6BFA0] shadow-sm mb-6 text-xs font-bold text-[#3A2418] animate-fade-in hover:border-[#C96F4A] transition">
               <span className="flex h-2 w-2 rounded-full bg-[#C96F4A] animate-ping" />
               <ShieldCheck className="w-4 h-4 text-[#C96F4A]" />
               <span>The 100% Audited Crowdfunding Standard</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl font-black text-[#3A2418] tracking-tight leading-[1.15] max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#3A2418] tracking-tight leading-[1.12] max-w-4xl mx-auto">
               Fund Ideas. Build Trust.{' '}
-              <span className="text-[#C96F4A]">
+              <span className="text-[#C96F4A] block sm:inline">
                 Create Impact.
               </span>
             </h1>
@@ -239,14 +253,14 @@ export const HomePage = () => {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/creator/campaigns/new"
-                className="btn-primary w-full sm:w-auto text-sm py-3.5 px-8 gap-2 shadow-lg shadow-[#C96F4A]/25"
+                className="btn-primary w-full sm:w-auto text-sm py-3.5 px-8 gap-2 shadow-lg shadow-[#C96F4A]/25 hover:scale-[1.02] active:scale-[0.98] transition-transform"
               >
                 <span>Start a Campaign</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/campaigns"
-                className="btn-secondary w-full sm:w-auto text-sm py-3.5 px-8"
+                className="btn-secondary w-full sm:w-auto text-sm py-3.5 px-8 bg-[#E8D5B7] hover:bg-[#DFCCA9] text-[#3A2418] border border-[#DCCBB5] hover:scale-[1.02] active:scale-[0.98] transition-transform"
               >
                 Explore Verified Campaigns
               </Link>
