@@ -197,47 +197,35 @@ export const HomePage = () => {
     >
       <div className="space-y-20 pb-20 overflow-hidden bg-[#F7F0E3] text-[#3A2418]">
         {/* 1. Hero Section */}
-        <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32 overflow-hidden border-b border-[#DCCBB5] bg-[#F7F0E3]">
-          {/* Background Image Layer */}
+        <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden bg-[#F7F0E3]">
+          {/* Background Image Layer (Uploaded Reference Asset) */}
           <img
             src="/images/crowdtrust-hero-bg.png"
-            alt="CrowdTrust community empowerment background"
+            alt="CrowdTrust Hero"
             aria-hidden="true"
             loading="eager"
-            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0 opacity-55 select-none"
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0 opacity-90 select-none"
           />
 
-          {/* Warm Cream / Almond Gradient Overlay */}
+          {/* Soft Central Warm Overlay so text is perfectly readable while image shines */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-[#FBF7EF]/80 via-[#F7F0E3]/85 to-[#F7F0E3]/95"
-          />
-
-          {/* Decorative Subtle Organic Accents (Behind Content) */}
-          <div
-            aria-hidden="true"
-            className="absolute top-10 left-1/2 -translate-x-1/2 w-[720px] h-[380px] bg-radial from-[#C96F4A]/10 via-[#E8D5B7]/25 to-transparent rounded-full blur-3xl pointer-events-none z-[1]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-12 -left-20 w-80 h-80 bg-radial from-[#E8D5B7]/40 via-transparent to-transparent rounded-full blur-2xl pointer-events-none z-[1]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -top-10 -right-16 w-80 h-80 bg-radial from-[#C96F4A]/12 via-transparent to-transparent rounded-full blur-2xl pointer-events-none z-[1]"
+            className="absolute inset-0 z-[1] pointer-events-none bg-radial from-[#F7F0E3]/70 via-[#F7F0E3]/35 to-transparent"
           />
 
           {/* Hero Content */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[2] text-center">
             {/* Trust Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8D5B7] border border-[#D6BFA0] shadow-sm mb-6 text-xs font-bold text-[#3A2418] animate-fade-in hover:border-[#C96F4A] transition">
-              <span className="flex h-2 w-2 rounded-full bg-[#C96F4A] animate-ping" />
-              <ShieldCheck className="w-4 h-4 text-[#C96F4A]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8D5B7]/90 border border-[#D6BFA0] shadow-sm mb-6 text-xs font-bold text-[#7A452F] backdrop-blur-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C96F4A]/40 inline-flex items-center justify-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C96F4A]" />
+              </span>
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C96F4A]" />
               <span>The 100% Audited Crowdfunding Standard</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#3A2418] tracking-tight leading-[1.12] max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-black text-[#3A2418] tracking-tight leading-[1.08] max-w-4xl mx-auto">
               Fund Ideas. Build Trust.{' '}
               <span className="text-[#C96F4A] block sm:inline">
                 Create Impact.
@@ -245,29 +233,29 @@ export const HomePage = () => {
             </h1>
 
             {/* Subheading */}
-            <p className="mt-6 text-base sm:text-lg text-[#6B5140] max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-sm sm:text-base text-[#5A4232] font-medium max-w-2xl mx-auto leading-relaxed">
               CrowdTrust is the transparent crowdfunding platform where every rupee is backed by verified creator identities, milestone escrow releases, and itemized invoice audits.
             </p>
 
             {/* Hero CTAs */}
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/creator/campaigns/new"
-                className="btn-primary w-full sm:w-auto text-sm py-3.5 px-8 gap-2 shadow-lg shadow-[#C96F4A]/25 hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                className="w-full sm:w-auto text-xs sm:text-sm font-bold py-3 px-7 rounded-2xl bg-[#C96F4A] hover:bg-[#B85D3B] text-white shadow-md transition flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>Start a Campaign</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/campaigns"
-                className="btn-secondary w-full sm:w-auto text-sm py-3.5 px-8 bg-[#E8D5B7] hover:bg-[#DFCCA9] text-[#3A2418] border border-[#DCCBB5] hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                className="w-full sm:w-auto text-xs sm:text-sm font-bold py-3 px-7 rounded-2xl bg-[#E8D5B7] hover:bg-[#DFCCA9] text-[#3A2418] border border-[#DCCBB5] shadow-xs transition hover:scale-[1.02] active:scale-[0.98]"
               >
                 Explore Verified Campaigns
               </Link>
             </div>
 
             {/* Trust Guarantees Row */}
-            <div className="mt-14 pt-8 border-t border-[#DCCBB5] max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-[#3A2418]">
+            <div className="mt-14 pt-8 border-t border-[#DCCBB5]/80 max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-[#3A2418]">
               <div className="flex items-center justify-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
                 <span>Identity Verified</span>
