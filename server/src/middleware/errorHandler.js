@@ -52,11 +52,24 @@ export const errorHandler = (err, req, res, next) => {
     }
   }
 
+  // MongoDB / Mongoose Connection & Buffering Timeouts
+  if (
+    err.name === 'MongooseError' ||
+    err.name === 'MongooseTimeoutError' ||
+    err.name === 'MongoServerSelectionError' ||
+    err.name === 'MongoNetworkError' ||
+    err.name === 'MongoTimeoutError' ||
+    err.message?.includes('buffering timed out')
+  ) {
+    statusCode = 503;
+    message = 'Database temporarily unavailable. Please try again.';
+  }
+
   const response = {
     success: false,
     message,
     ...(errors.length > 0 && { errors }),
-    ...(env.NODE_ENV === 'development' && { stack: err.stack }),
+    ...(env.NODE_ENV === 'development' && statusCode !== 503 && { stack: err.stack }),
   };
 
   if (statusCode === 500) {

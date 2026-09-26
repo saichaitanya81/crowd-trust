@@ -123,20 +123,28 @@ const authLimiter = rateLimit({
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/register', authLimiter);
 
+import { isDbConnected } from './config/db.js';
+import { requireDbConnection } from './middleware/dbCheck.js';
+
 // Static file hosting for uploads
 const uploadsPath = path.resolve(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadsPath));
 
 // Health check route
 app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    success: true,
-    status: 'healthy',
+  const dbStatus = isDbConnected();
+  res.status(dbStatus ? 200 : 503).json({
+    success: dbStatus,
+    status: dbStatus ? 'healthy' : 'degraded',
+    database: dbStatus ? 'connected' : 'disconnected',
     platform: 'CrowdTrust API',
     version: '1.0.0',
     timestamp: new Date().toISOString(),
   });
 });
+
+// Require active DB connection on data and auth API routes
+app.use('/api', requireDbConnection);
 
 // API Routes
 app.use('/api/auth', authRoutes);
