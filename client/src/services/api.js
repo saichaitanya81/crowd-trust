@@ -52,14 +52,21 @@ api.interceptors.response.use(
         window.location.pathname.includes('/login') ||
         window.location.pathname.includes('/register');
       // If token is expired or invalid outside login/register forms, clear local token
-      if (!isAuthRoute && (error.response?.data?.message?.toLowerCase().includes('token') || error.response?.data?.message?.toLowerCase().includes('session') || error.response?.data?.message?.toLowerCase().includes('authentication required'))) {
+      if (
+        !isAuthRoute &&
+        (error.response?.data?.message?.toLowerCase().includes('token') ||
+          error.response?.data?.message?.toLowerCase().includes('session') ||
+          error.response?.data?.message?.toLowerCase().includes('authentication required'))
+      ) {
         localStorage.removeItem('crowdtrust_token');
       }
     }
 
     const message =
       error.response?.data?.message ||
-      error.message ||
+      (error.code === 'ERR_NETWORK' || error.message?.includes('Network Error')
+        ? 'Unable to reach the CrowdTrust server. If using a free cloud tier, the server may be waking up (please wait ~30s and retry).'
+        : error.message) ||
       'An unexpected error occurred. Please try again.';
     const customError = new Error(message);
     customError.response = error.response;

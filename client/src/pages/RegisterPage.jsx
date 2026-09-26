@@ -65,8 +65,8 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[#F7F0E3] text-[#3A2418]">
-      <div className="sm:mx-auto sm:w-full sm:max-w-lg text-center space-y-2">
+    <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 auth-page-bg text-[#3A2418] relative">
+      <div className="sm:mx-auto sm:w-full sm:max-w-lg text-center space-y-2 relative z-10">
         <Link to="/" className="inline-flex items-center gap-2 mb-2">
           <div className="w-10 h-10 rounded-xl bg-[#C96F4A] flex items-center justify-center text-[#FFF8EE] shadow-md font-bold">
             <Shield className="w-5 h-5 fill-white/20" />
@@ -81,7 +81,7 @@ export const RegisterPage = () => {
         </p>
       </div>
 
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-lg">
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-lg relative z-10">
         <SpotlightCard
           className="p-8 space-y-6 shadow-warm-lg rounded-3xl border border-[#DCCBB5] bg-[#FBF7EF] registration-spotlight-card"
           spotlightColor="rgba(201, 111, 74, 0.14)"

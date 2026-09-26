@@ -7,8 +7,8 @@ export const protect = async (req, res, next) => {
   try {
     let token = null;
 
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-      token = req.headers.authorization.split(' ')[1];
+    if (req.headers.authorization && /^Bearer\s+/i.test(req.headers.authorization)) {
+      token = req.headers.authorization.replace(/^Bearer\s+/i, '').trim();
     } else if (req.cookies && req.cookies.jwt) {
       token = req.cookies.jwt;
     }
@@ -48,8 +48,8 @@ export const authorize = (...roles) => {
 export const optionalAuth = async (req, res, next) => {
   try {
     let token = null;
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-      token = req.headers.authorization.split(' ')[1];
+    if (req.headers.authorization && /^Bearer\s+/i.test(req.headers.authorization)) {
+      token = req.headers.authorization.replace(/^Bearer\s+/i, '').trim();
     } else if (req.cookies && req.cookies.jwt) {
       token = req.cookies.jwt;
     }

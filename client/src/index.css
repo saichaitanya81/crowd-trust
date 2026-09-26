@@ -208,3 +208,29 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #BAA080;
 }
+
+/* Authentication Page Background */
+.auth-page-bg {
+  background-color: #F7F0E3;
+  background-image: 
+    linear-gradient(
+      rgba(247, 240, 227, 0.76),
+      rgba(247, 240, 227, 0.76)
+    ),
+    url('/assets/a_soft_warm_minimal_pastel_toned_scene_with_a_c.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 640px) {
+  .auth-page-bg {
+    background-image: 
+      linear-gradient(
+        rgba(247, 240, 227, 0.85),
+        rgba(247, 240, 227, 0.85)
+      ),
+      url('/assets/a_soft_warm_minimal_pastel_toned_scene_with_a_c.png');
+    background-position: center 25%;
+  }
+}

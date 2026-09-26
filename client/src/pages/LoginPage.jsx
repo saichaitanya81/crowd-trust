@@ -39,8 +39,8 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[#F7F0E3] text-[#3A2418]">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2">
+    <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 auth-page-bg text-[#3A2418] relative">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2 relative z-10">
         <Link to="/" className="inline-flex items-center gap-2 mb-2">
           <div className="w-10 h-10 rounded-xl bg-[#C96F4A] flex items-center justify-center text-[#FFF8EE] shadow-md font-bold">
             <Shield className="w-5 h-5 fill-white/20" />
@@ -53,7 +53,7 @@ export const LoginPage = () => {
         <p className="text-xs text-[#6B5140]">Sign in to manage your campaigns, donations, and audited proofs.</p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="p-8 space-y-6 shadow-warm-lg rounded-3xl border border-[#DCCBB5] bg-[#FBF7EF]">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

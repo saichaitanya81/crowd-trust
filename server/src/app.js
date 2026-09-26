@@ -34,14 +34,6 @@ export const app = express();
 // Enable trust proxy for deployments behind reverse proxies (Render, Vercel)
 app.set('trust proxy', 1);
 
-// Security Headers
-app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-    crossOriginOpenerPolicy: false,
-  })
-);
-
 // CORS configuration supporting production deployment and local development
 const configuredClientUrls = (env.CLIENT_URL || '')
   .split(',')
@@ -95,8 +87,16 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
+// CORS must be mounted first to handle all cross-origin requests and preflights
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+
+// Security Headers
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    crossOriginOpenerPolicy: false,
+  })
+);
 
 // Request parsing
 app.use(express.json({ limit: '10mb' }));
@@ -108,10 +108,11 @@ if (env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
-// Rate Limiting on Auth
+// Rate Limiting on Auth (Skip preflight OPTIONS to prevent browser CORS false-positives)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 mins
   max: 100, // 100 requests per 15 min
+  skip: (req) => req.method === 'OPTIONS',
   message: {
     success: false,
     message: 'Too many authentication attempts, please try again after 15 minutes.',
