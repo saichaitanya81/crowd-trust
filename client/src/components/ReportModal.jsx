@@ -44,16 +44,16 @@ export const ReportModal = ({ campaignId, isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-scale-in">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div className="flex items-center gap-2 text-rose-600">
-            <ShieldAlert className="w-5 h-5" />
-            <h3 className="text-base font-bold text-slate-900">Report Campaign Concern</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2C1810]/60 backdrop-blur-sm animate-fade-in">
+      <div className="bg-[#FBF7EF] rounded-3xl max-w-md w-full p-6 shadow-warm-lg border border-[#DCCBB5] animate-scale-in text-[#3A2418]">
+        <div className="flex items-center justify-between pb-3 border-b border-[#EADDCB]">
+          <div className="flex items-center gap-2 text-[#B85D3B]">
+            <ShieldAlert className="w-5 h-5 text-[#C96F4A]" />
+            <h3 className="text-base font-bold text-[#3A2418]">Report Campaign Concern</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+            className="p-1 rounded-xl text-[#8A7463] hover:text-[#3A2418] hover:bg-[#F1E7D6] transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -61,13 +61,13 @@ export const ReportModal = ({ campaignId, isOpen, onClose }) => {
 
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
               Reason for Report
             </label>
             <select
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 font-medium focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418] font-medium focus:border-[#C96F4A]"
             >
               <option value="Suspicious campaign">Suspicious campaign</option>
               <option value="Misleading information">Misleading information</option>
@@ -79,7 +79,7 @@ export const ReportModal = ({ campaignId, isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
               Explanation & Specific Details
             </label>
             <textarea
@@ -87,26 +87,30 @@ export const ReportModal = ({ campaignId, isOpen, onClose }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Please explain your concern in detail for our compliance investigation..."
-              className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-800 leading-relaxed focus:ring-2 focus:ring-brand-500"
+              className="w-full p-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418] leading-relaxed focus:border-[#C96F4A]"
               required
             />
           </div>
 
-          <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-[11px] text-amber-800 flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <div className="p-3 bg-[#FEF3C7] rounded-xl border border-[#FDE68A] text-[11px] text-[#92400E] flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
             <span>
               All reports are reviewed confidentially by the CrowdTrust compliance board within 24 hours.
             </span>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="btn-secondary text-xs py-2 px-4">
+          <div className="flex items-center justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn-secondary text-xs py-2 px-4"
+            >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary text-xs py-2 px-4 bg-rose-600 hover:bg-rose-700"
+              className="btn-primary text-xs py-2 px-4"
             >
               {loading ? 'Submitting...' : 'Submit Report'}
             </button>
@@ -116,3 +120,5 @@ export const ReportModal = ({ campaignId, isOpen, onClose }) => {
     </div>
   );
 };
+
+export default ReportModal;

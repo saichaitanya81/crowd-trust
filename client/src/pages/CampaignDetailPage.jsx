@@ -97,8 +97,8 @@ export const CampaignDetailPage = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center space-y-4">
-        <div className="w-10 h-10 border-3 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-xs text-slate-500 font-medium">Loading verified campaign details...</p>
+        <div className="w-10 h-10 border-3 border-[#C96F4A] border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-xs text-[#6B5140] font-bold">Loading verified campaign details...</p>
       </div>
     );
   }
@@ -121,17 +121,17 @@ export const CampaignDetailPage = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 bg-[#F7F0E3] text-[#3A2418]">
       {/* Top Breadcrumb & Badges */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-          <Link to="/campaigns" className="hover:text-slate-900">Campaigns</Link>
+        <div className="flex items-center gap-2 text-xs font-bold text-[#6B5140]">
+          <Link to="/campaigns" className="hover:text-[#3A2418]">Campaigns</Link>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-slate-700 font-bold">{campaign.category}</span>
+          <span className="text-[#3A2418] font-bold">{campaign.category}</span>
         </div>
         <div className="flex items-center gap-2">
           <VerificationBadge status={campaign.verificationStatus} size="md" />
-          <span className="badge bg-slate-100 text-slate-700 uppercase">{campaign.status}</span>
+          <span className="badge bg-[#F0DDC7] text-[#7A452F] uppercase">{campaign.status}</span>
         </div>
       </div>
 
@@ -139,16 +139,16 @@ export const CampaignDetailPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Left 2 Cols: Media & Title */}
         <div className="lg:col-span-2 space-y-6">
-          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+          <h1 className="text-2xl sm:text-4xl font-black text-[#3A2418] tracking-tight leading-snug">
             {campaign.title}
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#6B5140] leading-relaxed">
             {campaign.shortDescription}
           </p>
 
           {/* Cover Media */}
-          <div className="relative aspect-video w-full rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-card">
+          <div className="relative aspect-video w-full rounded-3xl overflow-hidden bg-[#EFE5D3] border border-[#DCCBB5] shadow-warm">
             <img
               src={campaign.coverImage}
               alt={campaign.title}
@@ -157,19 +157,19 @@ export const CampaignDetailPage = () => {
           </div>
 
           {/* Organizer Info Box */}
-          <div className="card-container p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-50/70">
+          <div className="card-container p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#F1E7D6]">
             <div className="flex items-center gap-3">
               <img
                 src={campaign.creator?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${campaign.creator?.name || 'Creator'}`}
                 alt={campaign.creator?.name}
-                className="w-12 h-12 rounded-2xl border border-slate-200 object-cover"
+                className="w-12 h-12 rounded-2xl border border-[#DCCBB5] object-cover"
               />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-bold text-slate-900">{campaign.creator?.name}</span>
+                  <span className="text-sm font-bold text-[#3A2418]">{campaign.creator?.name}</span>
                   <VerificationBadge status={campaign.creator?.verificationStatus || 'verified'} size="sm" showText={false} />
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">
+                <p className="text-xs text-[#6B5140] mt-0.5 line-clamp-1">
                   {campaign.creator?.bio || `Campaign Organizer in ${campaign.location}`}
                 </p>
               </div>
@@ -178,7 +178,7 @@ export const CampaignDetailPage = () => {
             <button
               onClick={handleToggleFollow}
               className={`btn-secondary text-xs py-2 px-3 gap-1.5 ${
-                isFollowing ? 'bg-brand-50 border-brand-200 text-brand-700' : ''
+                isFollowing ? 'bg-[#F0DDC7] border-[#DCCBB5] text-[#7A452F]' : ''
               }`}
             >
               {isFollowing ? <BellOff className="w-3.5 h-3.5" /> : <Bell className="w-3.5 h-3.5" />}
@@ -189,31 +189,31 @@ export const CampaignDetailPage = () => {
 
         {/* Right Col: Funding Status Panel */}
         <div className="space-y-6">
-          <div className="card-container p-6 sm:p-8 space-y-6 sticky top-24 shadow-card">
+          <div className="card-container p-6 sm:p-8 space-y-6 sticky top-24 shadow-warm">
             {/* Amount Status */}
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-black text-slate-900">
+                <span className="text-3xl font-black text-[#C96F4A]">
                   ₹{Number(campaign.raisedAmount).toLocaleString()}
                 </span>
-                <span className="text-xs font-bold text-slate-500 uppercase">
+                <span className="text-xs font-bold text-[#6B5140] uppercase">
                   raised of ₹{Number(campaign.goalAmount).toLocaleString()}
                 </span>
               </div>
               <div className="mt-3">
-                <ProgressBar percentage={percentage} height="h-3" color={percentage >= 100 ? 'trust' : 'brand'} />
+                <ProgressBar percentage={percentage} height="h-3" color="terracotta" />
               </div>
             </div>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-2 gap-3 py-3 border-y border-slate-100 text-center">
-              <div className="p-3 bg-slate-50 rounded-xl">
-                <p className="text-lg font-black text-slate-900">{campaign.donorCount || 0}</p>
-                <p className="text-[11px] text-slate-500 font-medium">Supporters</p>
+            <div className="grid grid-cols-2 gap-3 py-3 border-y border-[#EADDCB] text-center">
+              <div className="p-3 bg-[#F1E7D6] rounded-2xl border border-[#DCCBB5]">
+                <p className="text-lg font-black text-[#3A2418]">{campaign.donorCount || 0}</p>
+                <p className="text-[11px] text-[#6B5140] font-bold">Supporters</p>
               </div>
-              <div className="p-3 bg-slate-50 rounded-xl">
-                <p className="text-lg font-black text-slate-900">{campaign.daysRemaining || 0}</p>
-                <p className="text-[11px] text-slate-500 font-medium">Days Remaining</p>
+              <div className="p-3 bg-[#F1E7D6] rounded-2xl border border-[#DCCBB5]">
+                <p className="text-lg font-black text-[#3A2418]">{campaign.daysRemaining || 0}</p>
+                <p className="text-[11px] text-[#6B5140] font-bold">Days Remaining</p>
               </div>
             </div>
 
@@ -222,13 +222,13 @@ export const CampaignDetailPage = () => {
               {campaign.status === 'active' ? (
                 <button
                   onClick={() => setIsDonationOpen(true)}
-                  className="btn-primary w-full py-4 text-sm font-bold gap-2 shadow-md hover:shadow-lg"
+                  className="btn-primary w-full py-4 text-sm font-bold gap-2 shadow-lg shadow-[#C96F4A]/25"
                 >
                   <Heart className="w-4 h-4 fill-white" />
                   <span>Donate to This Campaign</span>
                 </button>
               ) : (
-                <div className="p-3 bg-slate-100 text-slate-700 text-center text-xs font-bold rounded-xl">
+                <div className="p-3 bg-[#F1E7D6] text-[#6B5140] text-center text-xs font-bold rounded-xl border border-[#DCCBB5]">
                   This campaign is currently {campaign.status}.
                 </div>
               )}
@@ -237,10 +237,10 @@ export const CampaignDetailPage = () => {
                 <button
                   onClick={() => toggleBookmark(campaign._id)}
                   className={`btn-secondary text-xs py-2.5 gap-1.5 ${
-                    bookmarked ? 'bg-rose-50 text-rose-700 border-rose-200' : ''
+                    bookmarked ? 'bg-[#F0DDC7] text-[#7A452F] border-[#DCCBB5]' : ''
                   }`}
                 >
-                  <Bookmark className={`w-3.5 h-3.5 ${bookmarked ? 'fill-current text-rose-500' : ''}`} />
+                  <Bookmark className={`w-3.5 h-3.5 ${bookmarked ? 'fill-current text-[#C96F4A]' : ''}`} />
                   <span>{bookmarked ? 'Saved' : 'Save'}</span>
                 </button>
                 <button
@@ -254,12 +254,12 @@ export const CampaignDetailPage = () => {
             </div>
 
             {/* Trust Standard Guarantee Box */}
-            <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 space-y-2 text-xs">
-              <div className="flex items-center gap-1.5 text-emerald-800 font-bold">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <div className="p-4 rounded-2xl bg-[#F0DDC7] border border-[#DCCBB5] space-y-2 text-xs">
+              <div className="flex items-center gap-1.5 text-[#7A452F] font-bold">
+                <ShieldCheck className="w-4 h-4 text-[#C96F4A]" />
                 <span>CrowdTrust Escrow Guarantee</span>
               </div>
-              <p className="text-emerald-900/80 leading-relaxed text-[11px]">
+              <p className="text-[#6B5140] leading-relaxed text-[11px]">
                 Funds are disbursed exclusively in milestone installments upon submission and approval of audited receipts.
               </p>
             </div>
@@ -268,9 +268,9 @@ export const CampaignDetailPage = () => {
             <div className="text-center pt-2">
               <button
                 onClick={() => setIsReportOpen(true)}
-                className="text-[11px] text-slate-400 hover:text-rose-600 font-medium inline-flex items-center gap-1 transition"
+                className="text-[11px] text-[#8A7463] hover:text-[#B85D3B] font-bold inline-flex items-center gap-1 transition"
               >
-                <Flag className="w-3 h-3" />
+                <Flag className="w-3 h-3 text-[#C96F4A]" />
                 Report campaign concern
               </button>
             </div>
@@ -279,7 +279,7 @@ export const CampaignDetailPage = () => {
       </div>
 
       {/* Tabs Navigation Bar */}
-      <div className="border-b border-slate-200">
+      <div className="border-b border-[#DCCBB5]">
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -290,8 +290,8 @@ export const CampaignDetailPage = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`py-3.5 px-4 text-xs font-bold whitespace-nowrap border-b-2 flex items-center gap-2 transition ${
                   isActive
-                    ? 'border-brand-600 text-brand-700 bg-brand-50/30'
-                    : 'border-transparent text-slate-500 hover:text-slate-900'
+                    ? 'border-[#C96F4A] text-[#C96F4A] bg-[#F0DDC7]/30'
+                    : 'border-transparent text-[#6B5140] hover:text-[#3A2418]'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -309,44 +309,44 @@ export const CampaignDetailPage = () => {
           <div className="space-y-8 max-w-4xl">
             {/* Story Paragraphs */}
             <div className="card-container p-6 sm:p-8 space-y-6">
-              <h3 className="text-lg font-bold text-slate-900">About the Campaign</h3>
-              <div className="prose prose-slate max-w-none text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+              <h3 className="text-lg font-bold text-[#3A2418]">About the Campaign</h3>
+              <div className="prose max-w-none text-xs sm:text-sm text-[#6B5140] leading-relaxed whitespace-pre-line">
                 {campaign.description}
               </div>
 
               {/* Story Pillars (Problem / Solution / Beneficiaries / Impact) */}
               {campaign.story && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-slate-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-[#EADDCB]">
                   {campaign.story.problem && (
-                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/60">
-                      <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+                    <div className="p-4 bg-[#F1E7D6] rounded-2xl border border-[#DCCBB5]">
+                      <h4 className="text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1">
                         The Urgent Need
                       </h4>
-                      <p className="text-xs text-slate-600 leading-relaxed">{campaign.story.problem}</p>
+                      <p className="text-xs text-[#6B5140] leading-relaxed">{campaign.story.problem}</p>
                     </div>
                   )}
                   {campaign.story.solution && (
-                    <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/60">
-                      <h4 className="text-xs font-bold text-emerald-950 uppercase tracking-wider mb-1">
+                    <div className="p-4 bg-[#E8F0DF] rounded-2xl border border-[#C8DCAE]">
+                      <h4 className="text-xs font-bold text-[#3D5A2B] uppercase tracking-wider mb-1">
                         Proposed Solution
                       </h4>
-                      <p className="text-xs text-emerald-900/80 leading-relaxed">{campaign.story.solution}</p>
+                      <p className="text-xs text-[#3D5A2B] leading-relaxed">{campaign.story.solution}</p>
                     </div>
                   )}
                   {campaign.story.beneficiaries && (
-                    <div className="p-4 bg-sky-50/60 rounded-2xl border border-sky-200/60">
-                      <h4 className="text-xs font-bold text-sky-950 uppercase tracking-wider mb-1">
+                    <div className="p-4 bg-[#FEF3C7] rounded-2xl border border-[#FDE68A]">
+                      <h4 className="text-xs font-bold text-[#92400E] uppercase tracking-wider mb-1">
                         Direct Beneficiaries
                       </h4>
-                      <p className="text-xs text-sky-900/80 leading-relaxed">{campaign.story.beneficiaries}</p>
+                      <p className="text-xs text-[#92400E] leading-relaxed">{campaign.story.beneficiaries}</p>
                     </div>
                   )}
                   {campaign.story.expectedImpact && (
-                    <div className="p-4 bg-purple-50/60 rounded-2xl border border-purple-200/60">
-                      <h4 className="text-xs font-bold text-purple-950 uppercase tracking-wider mb-1">
+                    <div className="p-4 bg-[#F0DDC7] rounded-2xl border border-[#DCCBB5]">
+                      <h4 className="text-xs font-bold text-[#7A452F] uppercase tracking-wider mb-1">
                         Target Outcomes
                       </h4>
-                      <p className="text-xs text-purple-900/80 leading-relaxed">{campaign.story.expectedImpact}</p>
+                      <p className="text-xs text-[#7A452F] leading-relaxed">{campaign.story.expectedImpact}</p>
                     </div>
                   )}
                 </div>
@@ -358,26 +358,26 @@ export const CampaignDetailPage = () => {
               <div className="card-container p-6 sm:p-8 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-base font-bold text-slate-900">Planned Budget Breakdown</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <h3 className="text-base font-bold text-[#3A2418]">Planned Budget Breakdown</h3>
+                    <p className="text-xs text-[#6B5140] mt-0.5">
                       Estimated funding allocation submitted during campaign verification.
                     </p>
                   </div>
-                  <span className="text-sm font-black text-slate-900">
+                  <span className="text-sm font-black text-[#C96F4A]">
                     Total: ₹{campaign.budget.reduce((sum, b) => sum + b.amount, 0).toLocaleString()}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   {campaign.budget.map((item, idx) => (
-                    <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-start">
+                    <div key={idx} className="p-4 rounded-xl bg-[#F1E7D6] border border-[#DCCBB5] flex justify-between items-start">
                       <div>
-                        <span className="font-bold text-xs text-slate-800">{item.category}</span>
+                        <span className="font-bold text-xs text-[#3A2418]">{item.category}</span>
                         {item.description && (
-                          <p className="text-[11px] text-slate-500 mt-0.5">{item.description}</p>
+                          <p className="text-[11px] text-[#6B5140] mt-0.5">{item.description}</p>
                         )}
                       </div>
-                      <span className="font-extrabold text-xs text-slate-900">
+                      <span className="font-extrabold text-xs text-[#C96F4A]">
                         ₹{Number(item.amount).toLocaleString()}
                       </span>
                     </div>
@@ -392,10 +392,10 @@ export const CampaignDetailPage = () => {
         {activeTab === 'milestones' && (
           <div className="max-w-4xl space-y-6">
             <div className="card-container p-6">
-              <h3 className="text-base font-bold text-slate-900 mb-1">
+              <h3 className="text-base font-bold text-[#3A2418] mb-1">
                 Milestone Escrow Roadmap
               </h3>
-              <p className="text-xs text-slate-500 mb-6">
+              <p className="text-xs text-[#6B5140] mb-6">
                 Funding is released in stages as the creator completes and provides proof for each milestone.
               </p>
               <MilestoneTimeline milestones={milestones} />
@@ -408,8 +408,8 @@ export const CampaignDetailPage = () => {
           <div className="max-w-4xl space-y-6">
             <ExpenseChart transparency={transparency} />
             <div className="space-y-2">
-              <h3 className="text-base font-bold text-slate-900">Audited Vendor Receipts & Bills</h3>
-              <p className="text-xs text-slate-500 mb-4">
+              <h3 className="text-base font-bold text-[#3A2418]">Audited Vendor Receipts & Bills</h3>
+              <p className="text-xs text-[#6B5140] mb-4">
                 Click "Inspect Bill" on any record to view the verified receipt uploaded by the organizer.
               </p>
               <ExpenseTable expenses={expenses} />
@@ -421,20 +421,20 @@ export const CampaignDetailPage = () => {
         {activeTab === 'updates' && (
           <div className="max-w-4xl space-y-6">
             {updates.length === 0 ? (
-              <div className="p-8 text-center text-slate-500 text-xs bg-slate-50 rounded-2xl">
+              <div className="p-8 text-center text-[#8A7463] text-xs bg-[#F1E7D6] rounded-2xl border border-[#DCCBB5]">
                 No progress updates posted yet. Supporters will receive notifications once updates go live.
               </div>
             ) : (
               updates.map((up) => (
                 <div key={up._id} className="card-container p-6 sm:p-8 space-y-4">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span className="font-semibold text-brand-600 uppercase tracking-wider">
+                  <div className="flex items-center justify-between text-xs text-[#8A7463]">
+                    <span className="font-bold text-[#C96F4A] uppercase tracking-wider">
                       Organizer Update
                     </span>
                     <span>{new Date(up.createdAt).toLocaleDateString()}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">{up.title}</h3>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+                  <h3 className="text-lg font-bold text-[#3A2418]">{up.title}</h3>
+                  <p className="text-xs sm:text-sm text-[#6B5140] leading-relaxed whitespace-pre-line">
                     {up.content}
                   </p>
                   {up.images && up.images.length > 0 && (
@@ -444,7 +444,7 @@ export const CampaignDetailPage = () => {
                           key={i}
                           src={img}
                           alt="Update media"
-                          className="rounded-xl aspect-video object-cover w-full border border-slate-200"
+                          className="rounded-xl aspect-video object-cover w-full border border-[#DCCBB5]"
                         />
                       ))}
                     </div>
@@ -459,8 +459,8 @@ export const CampaignDetailPage = () => {
         {activeTab === 'impact' && (
           <div className="max-w-4xl space-y-6">
             <div className="card-container p-6 sm:p-8 space-y-4">
-              <h3 className="text-base font-bold text-slate-900">Measurable Real-World Outcomes</h3>
-              <p className="text-xs text-slate-500 mb-4">
+              <h3 className="text-base font-bold text-[#3A2418]">Measurable Real-World Outcomes</h3>
+              <p className="text-xs text-[#6B5140] mb-4">
                 Verified impact metrics tracking the tangible change delivered on the ground.
               </p>
               <ImpactCard impacts={impactMetrics} />
@@ -492,3 +492,5 @@ export const CampaignDetailPage = () => {
     </div>
   );
 };
+
+export default CampaignDetailPage;

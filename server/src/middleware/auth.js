@@ -13,7 +13,7 @@ export const protect = async (req, res, next) => {
       token = req.cookies.jwt;
     }
 
-    if (!token) {
+    if (!token || token === 'null' || token === 'undefined' || token === 'loggedout') {
       return next(new ApiError(401, 'Authentication required. Please log in.'));
     }
 
@@ -54,7 +54,7 @@ export const optionalAuth = async (req, res, next) => {
       token = req.cookies.jwt;
     }
 
-    if (token) {
+    if (token && token !== 'null' && token !== 'undefined' && token !== 'loggedout') {
       try {
         const decoded = jwt.verify(token, env.JWT_SECRET);
         const user = await User.findById(decoded.id).select('-password');

@@ -3,6 +3,7 @@ import { Bell, CheckCheck, Clock, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import api from '../services/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import BellToggle from './BellToggle/BellToggle.jsx';
 
 export const NotificationBell = () => {
   const { isAuthenticated } = useAuth();
@@ -71,26 +72,42 @@ export const NotificationBell = () => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button
+      <BellToggle
+        offLabel="Notifications"
+        onLabel="Notifications"
+        label="Notifications"
+        color="#3A2418"
+        background="#FBF7EF"
+        onColor="#3A2418"
+        onBackground="#E8D5B7"
+        size="md"
+        radius={12}
+        ringAmplitude={17}
+        ringPasses={5}
+        ringDecay={1}
+        ringDuration={820}
+        ringPivot={16}
+        crossfadeMs={200}
+        revealBounce={0}
+        count={unreadCount}
+        badge
+        badgeColor="#C96F4A"
+        badgeTextColor="#FBF7EF"
+        waves
+        clapper={false}
+        defaultPressed={false}
+        pressed={isOpen}
+        iconOnly
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition focus:outline-none"
-        aria-label="View notifications"
-      >
-        <Bell className="w-5 h-5" />
-        {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[11px] font-bold text-white bg-rose-500 rounded-full ring-2 ring-white animate-pulse">
-            {unreadCount > 9 ? '9+' : unreadCount}
-          </span>
-        )}
-      </button>
+      />
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-slate-200/80 z-50 overflow-hidden animate-scale-in">
-          <div className="px-4 py-3 bg-slate-50 border-b border-slate-200/80 flex items-center justify-between">
+        <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#FBF7EF] rounded-2xl shadow-xl border border-[#DCCBB5] z-50 overflow-hidden animate-scale-in text-[#3A2418]">
+          <div className="px-4 py-3 bg-[#F1E7D6] border-b border-[#DCCBB5] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-sm text-slate-800">Notifications</span>
+              <span className="font-bold text-sm text-[#3A2418]">Notifications</span>
               {unreadCount > 0 && (
-                <span className="bg-brand-100 text-brand-700 text-xs font-semibold px-2 py-0.5 rounded-full">
+                <span className="bg-[#F0DDC7] text-[#7A452F] border border-[#DCCBB5] text-xs font-bold px-2 py-0.5 rounded-full">
                   {unreadCount} new
                 </span>
               )}
@@ -99,7 +116,7 @@ export const NotificationBell = () => {
               <button
                 onClick={handleMarkAllAsRead}
                 disabled={loading}
-                className="text-xs text-brand-600 hover:text-brand-800 font-medium flex items-center gap-1 transition"
+                className="text-xs text-[#C96F4A] hover:text-[#B85D3B] font-bold flex items-center gap-1 transition"
               >
                 <CheckCheck className="w-3.5 h-3.5" />
                 Mark all read
@@ -107,10 +124,10 @@ export const NotificationBell = () => {
             )}
           </div>
 
-          <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
+          <div className="max-h-80 overflow-y-auto divide-y divide-[#EADDCB]">
             {notifications.length === 0 ? (
-              <div className="p-6 text-center text-slate-500 text-sm">
-                <Bell className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+              <div className="p-6 text-center text-[#8A7463] text-sm">
+                <Bell className="w-8 h-8 text-[#D6BFA0] mx-auto mb-2" />
                 No notifications yet.
               </div>
             ) : (
@@ -118,19 +135,19 @@ export const NotificationBell = () => {
                 <div
                   key={n._id}
                   onClick={() => !n.read && handleMarkAsRead(n._id)}
-                  className={`p-3.5 hover:bg-slate-50 transition cursor-pointer flex items-start gap-3 ${
-                    !n.read ? 'bg-brand-50/40' : ''
+                  className={`p-3.5 hover:bg-[#F1E7D6] transition cursor-pointer flex items-start gap-3 ${
+                    !n.read ? 'bg-[#F0DDC7]/30' : ''
                   }`}
                 >
                   <div
                     className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                      !n.read ? 'bg-brand-500' : 'bg-transparent'
+                      !n.read ? 'bg-[#C96F4A]' : 'bg-transparent'
                     }`}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-slate-800 leading-snug">{n.title}</p>
-                    <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{n.message}</p>
-                    <div className="flex items-center gap-3 mt-1 text-[11px] text-slate-400">
+                    <p className="text-xs font-bold text-[#3A2418] leading-snug">{n.title}</p>
+                    <p className="text-xs text-[#6B5140] mt-0.5 leading-relaxed">{n.message}</p>
+                    <div className="flex items-center gap-3 mt-1 text-[11px] text-[#8A7463]">
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {new Date(n.createdAt).toLocaleDateString()}
@@ -139,7 +156,7 @@ export const NotificationBell = () => {
                         <Link
                           to={n.link}
                           onClick={() => setIsOpen(false)}
-                          className="text-brand-600 hover:underline flex items-center gap-0.5 font-medium"
+                          className="text-[#C96F4A] hover:underline flex items-center gap-0.5 font-bold"
                         >
                           View <ExternalLink className="w-2.5 h-2.5" />
                         </Link>
@@ -155,3 +172,5 @@ export const NotificationBell = () => {
     </div>
   );
 };
+
+export default NotificationBell;

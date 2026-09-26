@@ -185,8 +185,8 @@ export const ManageCampaignHub = () => {
   if (loading || !campaignData) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <div className="w-8 h-8 border-3 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-        <p className="text-xs text-slate-500">Loading campaign management hub...</p>
+        <div className="w-8 h-8 border-3 border-[#C96F4A] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+        <p className="text-xs text-[#8A7463]">Loading campaign management hub...</p>
       </div>
     );
   }
@@ -199,9 +199,9 @@ export const ManageCampaignHub = () => {
       <div className="flex items-center justify-between">
         <Link
           to="/creator/dashboard"
-          className="text-xs font-bold text-slate-500 hover:text-slate-900 flex items-center gap-1"
+          className="text-xs font-bold text-[#8A7463] hover:text-[#3A2418] flex items-center gap-1 transition"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Creator Dashboard
+          <ArrowLeft className="w-4 h-4 text-[#C96F4A]" /> Back to Creator Dashboard
         </Link>
         <Link
           to={`/campaigns/${campaign.slug || campaign._id}`}
@@ -212,30 +212,30 @@ export const ManageCampaignHub = () => {
       </div>
 
       {/* Banner Card */}
-      <div className="card-container p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-brand-950 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-0 shadow-xl">
+      <div className="card-container p-6 sm:p-8 bg-gradient-to-r from-[#FBF7EF] to-[#F1E7D6] text-[#3A2418] flex flex-col sm:flex-row sm:items-center justify-between gap-6 border border-[#DCCBB5] shadow-[0_8px_24px_rgba(58,36,24,0.06)]">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="badge bg-white/20 text-white">{campaign.category}</span>
-            <span className="badge bg-emerald-500/20 text-emerald-300 uppercase">{campaign.status}</span>
+            <span className="badge bg-[#E8D5B7] text-[#6B5140] border border-[#DCCBB5]">{campaign.category}</span>
+            <span className="badge bg-[#F0DDC7] text-[#7A452F] border border-[#E8B89D] uppercase">{campaign.status}</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-black">{campaign.title}</h1>
-          <p className="text-xs text-slate-300">
-            Raised ₹{Number(campaign.raisedAmount).toLocaleString()} of ₹{Number(campaign.goalAmount).toLocaleString()} • {campaign.donorCount} Donors
+          <h1 className="text-xl sm:text-2xl font-black text-[#3A2418]">{campaign.title}</h1>
+          <p className="text-xs text-[#6B5140]">
+            Raised <span className="font-bold text-[#C96F4A]">₹{Number(campaign.raisedAmount).toLocaleString()}</span> of ₹{Number(campaign.goalAmount).toLocaleString()} • {campaign.donorCount} Donors
           </p>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="border-b border-slate-200 flex gap-2 overflow-x-auto">
+      <div className="border-b border-[#DCCBB5] flex gap-2 overflow-x-auto">
         <button
           onClick={() => setActiveTab('milestones')}
           className={`py-3 px-4 text-xs font-bold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'milestones'
-              ? 'border-brand-600 text-brand-700 bg-brand-50/40'
-              : 'border-transparent text-slate-500 hover:text-slate-900'
+              ? 'border-[#C96F4A] text-[#C96F4A] bg-[#F1E7D6]/50'
+              : 'border-transparent text-[#8A7463] hover:text-[#3A2418]'
           }`}
         >
-          <Target className="w-4 h-4" />
+          <Target className="w-4 h-4 text-[#C96F4A]" />
           Milestones & Evidence
         </button>
 
@@ -243,11 +243,11 @@ export const ManageCampaignHub = () => {
           onClick={() => setActiveTab('expenses')}
           className={`py-3 px-4 text-xs font-bold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'expenses'
-              ? 'border-brand-600 text-brand-700 bg-brand-50/40'
-              : 'border-transparent text-slate-500 hover:text-slate-900'
+              ? 'border-[#C96F4A] text-[#C96F4A] bg-[#F1E7D6]/50'
+              : 'border-transparent text-[#8A7463] hover:text-[#3A2418]'
           }`}
         >
-          <FileSpreadsheet className="w-4 h-4" />
+          <FileSpreadsheet className="w-4 h-4 text-[#C96F4A]" />
           Expense Receipts ({expenses.length})
         </button>
 
@@ -255,11 +255,11 @@ export const ManageCampaignHub = () => {
           onClick={() => setActiveTab('updates')}
           className={`py-3 px-4 text-xs font-bold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'updates'
-              ? 'border-brand-600 text-brand-700 bg-brand-50/40'
-              : 'border-transparent text-slate-500 hover:text-slate-900'
+              ? 'border-[#C96F4A] text-[#C96F4A] bg-[#F1E7D6]/50'
+              : 'border-transparent text-[#8A7463] hover:text-[#3A2418]'
           }`}
         >
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="w-4 h-4 text-[#C96F4A]" />
           Post Update ({updates.length})
         </button>
 
@@ -267,11 +267,11 @@ export const ManageCampaignHub = () => {
           onClick={() => setActiveTab('impact')}
           className={`py-3 px-4 text-xs font-bold border-b-2 transition flex items-center gap-2 ${
             activeTab === 'impact'
-              ? 'border-brand-600 text-brand-700 bg-brand-50/40'
-              : 'border-transparent text-slate-500 hover:text-slate-900'
+              ? 'border-[#C96F4A] text-[#C96F4A] bg-[#F1E7D6]/50'
+              : 'border-transparent text-[#8A7463] hover:text-[#3A2418]'
           }`}
         >
-          <Award className="w-4 h-4" />
+          <Award className="w-4 h-4 text-[#C96F4A]" />
           Impact Metrics
         </button>
       </div>
@@ -280,23 +280,23 @@ export const ManageCampaignHub = () => {
       {activeTab === 'milestones' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Submit Evidence Form */}
-          <div className="card-container p-6 sm:p-8 space-y-6">
+          <div className="card-container p-6 sm:p-8 space-y-6 bg-[#FBF7EF] border border-[#DCCBB5]">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Submit Milestone Proof</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-[#3A2418]">Submit Milestone Proof</h3>
+              <p className="text-xs text-[#6B5140] mt-0.5">
                 Submit evidence to complete milestones and unlock escrow installments.
               </p>
             </div>
 
             <form onSubmit={handleSubmitEvidence} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Select Milestone
                 </label>
                 <select
                   value={selectedMilestoneId}
                   onChange={(e) => setSelectedMilestoneId(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                 >
                   {milestones.map((m) => (
                     <option key={m._id} value={m._id}>
@@ -307,7 +307,7 @@ export const ManageCampaignHub = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Evidence Description & Field Work Notes
                 </label>
                 <textarea
@@ -315,13 +315,13 @@ export const ManageCampaignHub = () => {
                   placeholder="Detail the work completed, deliveries accepted, and vendor interactions..."
                   value={evidenceDesc}
                   onChange={(e) => setEvidenceDesc(e.target.value)}
-                  className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-800 leading-relaxed"
+                  className="w-full p-3 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none leading-relaxed"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Evidence Document / Photo Proof URL
                 </label>
                 <input
@@ -329,7 +329,7 @@ export const ManageCampaignHub = () => {
                   placeholder="https://images.unsplash.com/... or uploaded document link"
                   value={evidenceUrl}
                   onChange={(e) => setEvidenceUrl(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                   required
                 />
               </div>
@@ -346,31 +346,31 @@ export const ManageCampaignHub = () => {
 
           {/* Current Milestones Status List */}
           <div className="space-y-4">
-            <h3 className="text-base font-bold text-slate-900">Current Milestone Statuses</h3>
+            <h3 className="text-base font-bold text-[#3A2418]">Current Milestone Statuses</h3>
             <div className="space-y-3">
               {milestones.map((m, i) => (
-                <div key={m._id} className="card-container p-4 space-y-2">
+                <div key={m._id} className="card-container p-4 space-y-2 bg-[#FBF7EF] border border-[#DCCBB5]">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900">
+                    <span className="text-xs font-bold text-[#3A2418]">
                       {i + 1}. {m.title}
                     </span>
                     <span
                       className={`badge text-[11px] ${
                         m.status === 'completed' || m.status === 'approved'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-[#E6F4EA] text-[#137333] border border-[#CEEAD6]'
                           : m.status === 'submitted'
-                          ? 'bg-amber-100 text-amber-800'
+                          ? 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]'
                           : m.status === 'active'
-                          ? 'bg-brand-100 text-brand-800'
-                          : 'bg-slate-100 text-slate-600'
+                          ? 'bg-[#F0DDC7] text-[#7A452F] border border-[#E8B89D]'
+                          : 'bg-[#F1E7D6] text-[#8A7463] border border-[#DCCBB5]'
                       }`}
                     >
                       {m.status}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500">{m.description}</p>
-                  <div className="text-xs font-extrabold text-slate-800">
-                    Allocated: ₹{Number(m.targetAmount).toLocaleString()}
+                  <p className="text-xs text-[#6B5140]">{m.description}</p>
+                  <div className="text-xs font-extrabold text-[#3A2418]">
+                    Allocated: <span className="text-[#C96F4A]">₹{Number(m.targetAmount).toLocaleString()}</span>
                   </div>
                 </div>
               ))}
@@ -382,17 +382,17 @@ export const ManageCampaignHub = () => {
       {/* TAB 2: Upload Expense Receipt */}
       {activeTab === 'expenses' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="card-container p-6 sm:p-8 space-y-6">
+          <div className="card-container p-6 sm:p-8 space-y-6 bg-[#FBF7EF] border border-[#DCCBB5]">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Record An Audited Expense</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-[#3A2418]">Record An Audited Expense</h3>
+              <p className="text-xs text-[#6B5140] mt-0.5">
                 Upload vendor bills and invoices to maintain 100% financial transparency.
               </p>
             </div>
 
             <form onSubmit={handleSubmitExpense} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Expense Description
                 </label>
                 <input
@@ -400,20 +400,20 @@ export const ManageCampaignHub = () => {
                   placeholder="e.g. Purchase of 30 Solar PV panels from manufacturer"
                   value={expenseDesc}
                   onChange={(e) => setExpenseDesc(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                     Category
                   </label>
                   <select
                     value={expenseCategory}
                     onChange={(e) => setExpenseCategory(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-white font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none font-medium"
                   >
                     <option value="Equipment">Equipment</option>
                     <option value="Materials">Materials</option>
@@ -426,7 +426,7 @@ export const ManageCampaignHub = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                     Amount (INR ₹)
                   </label>
                   <input
@@ -435,14 +435,14 @@ export const ManageCampaignHub = () => {
                     placeholder="e.g. 45000"
                     value={expenseAmount}
                     onChange={(e) => setExpenseAmount(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-900"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs font-bold text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Receipt / Tax Invoice Image URL
                 </label>
                 <input
@@ -450,7 +450,7 @@ export const ManageCampaignHub = () => {
                   placeholder="https://... or uploaded image link"
                   value={expenseReceiptUrl}
                   onChange={(e) => setExpenseReceiptUrl(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                   required
                 />
               </div>
@@ -466,22 +466,22 @@ export const ManageCampaignHub = () => {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-base font-bold text-slate-900">Recorded Expenses ({expenses.length})</h3>
+            <h3 className="text-base font-bold text-[#3A2418]">Recorded Expenses ({expenses.length})</h3>
             <div className="space-y-3">
               {expenses.map((exp) => (
-                <div key={exp._id} className="card-container p-4 flex items-center justify-between text-xs">
+                <div key={exp._id} className="card-container p-4 flex items-center justify-between text-xs bg-[#FBF7EF] border border-[#DCCBB5]">
                   <div>
-                    <span className="badge bg-slate-100 text-slate-700 mb-1">{exp.category}</span>
-                    <p className="font-bold text-slate-900">{exp.description}</p>
-                    <span className="text-slate-400">{new Date(exp.date || exp.createdAt).toLocaleDateString()}</span>
+                    <span className="badge bg-[#F1E7D6] text-[#6B5140] border border-[#DCCBB5] mb-1">{exp.category}</span>
+                    <p className="font-bold text-[#3A2418]">{exp.description}</p>
+                    <span className="text-[#8A7463]">{new Date(exp.date || exp.createdAt).toLocaleDateString()}</span>
                   </div>
                   <div className="text-right">
-                    <p className="font-extrabold text-sm text-slate-900">₹{Number(exp.amount).toLocaleString()}</p>
+                    <p className="font-extrabold text-sm text-[#C96F4A]">₹{Number(exp.amount).toLocaleString()}</p>
                     <span
                       className={`badge text-[10px] mt-1 ${
                         exp.status === 'approved'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-[#E6F4EA] text-[#137333] border border-[#CEEAD6]'
+                          : 'bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]'
                       }`}
                     >
                       {exp.status}
@@ -497,17 +497,17 @@ export const ManageCampaignHub = () => {
       {/* TAB 3: Post Update */}
       {activeTab === 'updates' && (
         <div className="max-w-2xl">
-          <div className="card-container p-6 sm:p-8 space-y-6">
+          <div className="card-container p-6 sm:p-8 space-y-6 bg-[#FBF7EF] border border-[#DCCBB5]">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Publish Progress Update</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <h3 className="text-base font-bold text-[#3A2418]">Publish Progress Update</h3>
+              <p className="text-xs text-[#6B5140] mt-0.5">
                 Keep your backers informed. All supporters will receive in-app notifications.
               </p>
             </div>
 
             <form onSubmit={handleSubmitUpdate} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Update Title
                 </label>
                 <input
@@ -515,13 +515,13 @@ export const ManageCampaignHub = () => {
                   placeholder="e.g. First Batch of Equipment Arrived on Site!"
                   value={updateTitle}
                   onChange={(e) => setUpdateTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none font-bold"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Update Content & Progress Report
                 </label>
                 <textarea
@@ -529,13 +529,13 @@ export const ManageCampaignHub = () => {
                   placeholder="Describe recent accomplishments, challenges overcome, and next week's goals..."
                   value={updateContent}
                   onChange={(e) => setUpdateContent(e.target.value)}
-                  className="w-full p-3.5 rounded-xl border border-slate-300 text-xs text-slate-800 leading-relaxed"
+                  className="w-full p-3.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none leading-relaxed"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-[#6B5140] uppercase tracking-wider mb-1">
                   Photo URL (Optional)
                 </label>
                 <input
@@ -543,7 +543,7 @@ export const ManageCampaignHub = () => {
                   placeholder="https://images.unsplash.com/..."
                   value={updateImageUrl}
                   onChange={(e) => setUpdateImageUrl(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                 />
               </div>
 
@@ -562,11 +562,11 @@ export const ManageCampaignHub = () => {
       {/* TAB 4: Impact Metrics */}
       {activeTab === 'impact' && (
         <div className="max-w-3xl space-y-6">
-          <div className="card-container p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b">
+          <div className="card-container p-6 sm:p-8 space-y-6 bg-[#FBF7EF] border border-[#DCCBB5]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DCCBB5]">
               <div>
-                <h3 className="text-base font-bold text-slate-900">Define Tangible Impact Outcomes</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="text-base font-bold text-[#3A2418]">Define Tangible Impact Outcomes</h3>
+                <p className="text-xs text-[#6B5140]">
                   Measurable figures displayed prominently on your campaign page.
                 </p>
               </div>
@@ -580,7 +580,7 @@ export const ManageCampaignHub = () => {
                 }
                 className="btn-secondary text-xs py-2 px-3 gap-1"
               >
-                <Plus className="w-3.5 h-3.5" /> Add Metric
+                <Plus className="w-3.5 h-3.5 text-[#C96F4A]" /> Add Metric
               </button>
             </div>
 
@@ -588,10 +588,10 @@ export const ManageCampaignHub = () => {
               {impactList.map((m, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center"
+                  className="p-4 rounded-xl bg-[#F1E7D6]/50 border border-[#DCCBB5] grid grid-cols-1 sm:grid-cols-12 gap-3 items-center"
                 >
                   <div className="sm:col-span-5">
-                    <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+                    <label className="block text-[10px] font-bold uppercase text-[#8A7463] mb-0.5">
                       Metric Name
                     </label>
                     <input
@@ -603,12 +603,12 @@ export const ManageCampaignHub = () => {
                         setImpactList(copy);
                       }}
                       placeholder="e.g. Patients Treated"
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold"
+                      className="w-full px-3 py-1.5 rounded-lg border border-[#D6BFA0] text-xs font-bold text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                     />
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+                    <label className="block text-[10px] font-bold uppercase text-[#8A7463] mb-0.5">
                       Value
                     </label>
                     <input
@@ -620,12 +620,12 @@ export const ManageCampaignHub = () => {
                         copy[idx].metricValue = Number(e.target.value);
                         setImpactList(copy);
                       }}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold"
+                      className="w-full px-3 py-1.5 rounded-lg border border-[#D6BFA0] text-xs font-bold text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                     />
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label className="block text-[10px] font-bold uppercase text-slate-500 mb-0.5">
+                    <label className="block text-[10px] font-bold uppercase text-[#8A7463] mb-0.5">
                       Unit (people, kits)
                     </label>
                     <input
@@ -637,7 +637,7 @@ export const ManageCampaignHub = () => {
                         setImpactList(copy);
                       }}
                       placeholder="e.g. people"
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs"
+                      className="w-full px-3 py-1.5 rounded-lg border border-[#D6BFA0] text-xs text-[#3A2418] bg-[#FBF7EF] focus:border-[#C96F4A] outline-none"
                     />
                   </div>
 
@@ -645,7 +645,7 @@ export const ManageCampaignHub = () => {
                     <button
                       type="button"
                       onClick={() => setImpactList(impactList.filter((_, i) => i !== idx))}
-                      className="p-1.5 text-slate-400 hover:text-rose-600"
+                      className="p-1.5 text-[#8A7463] hover:text-rose-600 transition"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

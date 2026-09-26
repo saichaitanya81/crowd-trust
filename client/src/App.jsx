@@ -24,20 +24,20 @@ import { ShieldAlert, ArrowLeft } from 'lucide-react';
 
 function NotFoundPage() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center bg-slate-900 px-4">
-      <div className="text-center max-w-md">
-        <div className="w-16 h-16 bg-slate-800 text-teal-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-700">
+    <div className="min-h-[70vh] flex items-center justify-center bg-[#F7F0E3] px-4">
+      <div className="text-center max-w-md p-8 bg-[#FBF7EF] border border-[#DCCBB5] rounded-3xl shadow-warm">
+        <div className="w-16 h-16 bg-[#F0DDC7] text-[#C96F4A] rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#E8DAC6]">
           <ShieldAlert className="w-8 h-8" />
         </div>
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">404</h1>
-        <h2 className="text-xl font-bold text-slate-200 mt-2">Page Not Found</h2>
-        <p className="text-sm text-slate-400 mt-2">
+        <h1 className="text-4xl font-black text-[#3A2418] tracking-tight">404</h1>
+        <h2 className="text-xl font-bold text-[#6B5140] mt-2">Page Not Found</h2>
+        <p className="text-sm text-[#8A7463] mt-2 leading-relaxed">
           The link you followed may be broken or the verified campaign page has been removed.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-sm transition"
+            className="btn-primary inline-flex items-center space-x-2 text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to Homepage</span>
@@ -50,7 +50,7 @@ function NotFoundPage() {
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-teal-500 selection:text-slate-950">
+    <div className="min-h-screen flex flex-col bg-[#F7F0E3] text-[#3A2418] selection:bg-[#C96F4A] selection:text-[#FFF8EE]">
       <Navbar />
       
       <main className="flex-grow">

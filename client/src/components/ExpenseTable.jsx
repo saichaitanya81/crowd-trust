@@ -6,28 +6,28 @@ export const ExpenseTable = ({ expenses = [] }) => {
 
   if (!expenses || expenses.length === 0) {
     return (
-      <div className="p-8 text-center text-slate-500 text-xs bg-slate-50 rounded-2xl border border-slate-100">
-        <Receipt className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+      <div className="p-8 text-center text-[#8A7463] text-xs bg-[#F1E7D6] rounded-2xl border border-[#DCCBB5]">
+        <Receipt className="w-8 h-8 text-[#B85D3B] mx-auto mb-2 opacity-60" />
         No verified expense records uploaded yet. All future receipts will appear here automatically.
       </div>
     );
   }
 
   const categoryColors = {
-    Equipment: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-    Materials: 'bg-sky-50 text-sky-700 border-sky-200',
-    Labor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    'Logistics & Transport': 'bg-amber-50 text-amber-700 border-amber-200',
-    'Legal & Permitting': 'bg-purple-50 text-purple-700 border-purple-200',
-    Operations: 'bg-slate-100 text-slate-700 border-slate-200',
-    Other: 'bg-slate-100 text-slate-700 border-slate-200',
+    Equipment: 'bg-[#F0DDC7] text-[#7A452F] border-[#DCCBB5]',
+    Materials: 'bg-[#F1E7D6] text-[#6B5140] border-[#DCCBB5]',
+    Labor: 'bg-[#E8F0DF] text-[#3D5A2B] border-[#C8DCAE]',
+    'Logistics & Transport': 'bg-[#FEF3C7] text-[#92400E] border-[#FDE68A]',
+    'Legal & Permitting': 'bg-[#EAE6DF] text-[#5A483C] border-[#D6CABA]',
+    Operations: 'bg-[#F1E7D6] text-[#6B5140] border-[#DCCBB5]',
+    Other: 'bg-[#F1E7D6] text-[#6B5140] border-[#DCCBB5]',
   };
 
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto rounded-2xl border border-slate-200/80 shadow-subtle bg-white">
-        <table className="min-w-full divide-y divide-slate-100 text-left text-xs">
-          <thead className="bg-slate-50 font-bold text-slate-600 uppercase tracking-wider text-[11px]">
+      <div className="overflow-x-auto rounded-2xl border border-[#DCCBB5] shadow-sm bg-[#FBF7EF]">
+        <table className="min-w-full divide-y divide-[#EADDCB] text-left text-xs">
+          <thead className="bg-[#F1E7D6] font-bold text-[#3A2418] uppercase tracking-wider text-[11px]">
             <tr>
               <th className="py-3.5 px-4">Date</th>
               <th className="py-3.5 px-4">Category</th>
@@ -37,10 +37,10 @@ export const ExpenseTable = ({ expenses = [] }) => {
               <th className="py-3.5 px-4 text-center">Audit Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+          <tbody className="divide-y divide-[#EADDCB] font-medium text-[#3A2418]">
             {expenses.map((exp) => (
-              <tr key={exp._id} className="hover:bg-slate-50/80 transition-colors">
-                <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">
+              <tr key={exp._id} className="hover:bg-[#F1E7D6]/60 transition-colors">
+                <td className="py-3.5 px-4 text-[#6B5140] whitespace-nowrap">
                   {new Date(exp.date || exp.createdAt).toLocaleDateString('en-IN', {
                     day: 'numeric',
                     month: 'short',
@@ -49,42 +49,42 @@ export const ExpenseTable = ({ expenses = [] }) => {
                 </td>
                 <td className="py-3.5 px-4 whitespace-nowrap">
                   <span
-                    className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold border ${
+                    className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold border ${
                       categoryColors[exp.category] || categoryColors.Other
                     }`}
                   >
                     {exp.category}
                   </span>
                 </td>
-                <td className="py-3.5 px-4 text-slate-700 max-w-xs">{exp.description}</td>
-                <td className="py-3.5 px-4 text-right font-extrabold text-slate-900 whitespace-nowrap">
+                <td className="py-3.5 px-4 text-[#3A2418] max-w-xs">{exp.description}</td>
+                <td className="py-3.5 px-4 text-right font-black text-[#C96F4A] whitespace-nowrap">
                   ₹{Number(exp.amount).toLocaleString()}
                 </td>
                 <td className="py-3.5 px-4 text-center whitespace-nowrap">
                   {exp.receiptUrl ? (
                     <button
                       onClick={() => setSelectedReceipt(exp)}
-                      className="inline-flex items-center gap-1 text-xs text-brand-600 hover:text-brand-800 font-semibold p-1 rounded hover:bg-brand-50 transition"
+                      className="inline-flex items-center gap-1 text-xs text-[#C96F4A] hover:text-[#B85D3B] font-bold p-1 rounded hover:bg-[#F0DDC7] transition"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       Inspect Bill
                     </button>
                   ) : (
-                    <span className="text-slate-400 text-[11px]">No receipt</span>
+                    <span className="text-[#8A7463] text-[11px]">No receipt</span>
                   )}
                 </td>
                 <td className="py-3.5 px-4 text-center whitespace-nowrap">
                   {exp.status === 'approved' ? (
-                    <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold text-[11px] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="inline-flex items-center gap-1 text-[#3D5A2B] font-bold text-[11px] bg-[#E8F0DF] px-2.5 py-0.5 rounded-full border border-[#C8DCAE]">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#4A6B3A]" />
                       Audited
                     </span>
                   ) : exp.status === 'pending' ? (
-                    <span className="inline-flex items-center text-amber-700 font-medium text-[11px] bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                    <span className="inline-flex items-center text-[#92400E] font-bold text-[11px] bg-[#FEF3C7] px-2.5 py-0.5 rounded-full border border-[#FDE68A]">
                       Review Pending
                     </span>
                   ) : (
-                    <span className="inline-flex items-center text-rose-700 font-medium text-[11px] bg-rose-50 px-2 py-0.5 rounded-full">
+                    <span className="inline-flex items-center text-[#9B1C1C] font-bold text-[11px] bg-[#FDE8E8] px-2.5 py-0.5 rounded-full border border-[#F8B4B4]">
                       Rejected
                     </span>
                   )}
@@ -97,22 +97,22 @@ export const ExpenseTable = ({ expenses = [] }) => {
 
       {/* Receipt Inspection Modal */}
       {selectedReceipt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-slate-200 animate-scale-in">
-            <div className="flex items-center justify-between border-b pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2C1810]/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-[#FBF7EF] rounded-3xl max-w-lg w-full p-6 shadow-warm-lg space-y-4 border border-[#DCCBB5] animate-scale-in text-[#3A2418]">
+            <div className="flex items-center justify-between border-b border-[#EADDCB] pb-3">
               <div>
-                <h3 className="text-base font-bold text-slate-900">Verified Invoice / Receipt</h3>
-                <p className="text-xs text-slate-500">{selectedReceipt.description}</p>
+                <h3 className="text-base font-bold text-[#3A2418]">Verified Invoice / Receipt</h3>
+                <p className="text-xs text-[#6B5140]">{selectedReceipt.description}</p>
               </div>
               <button
                 onClick={() => setSelectedReceipt(null)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                className="p-1 rounded-xl text-[#8A7463] hover:text-[#3A2418] hover:bg-[#F1E7D6] transition"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="aspect-video w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center">
+            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-[#EFE5D3] border border-[#DCCBB5] flex items-center justify-center">
               <img
                 src={selectedReceipt.receiptUrl}
                 alt="Receipt Proof"
@@ -120,10 +120,10 @@ export const ExpenseTable = ({ expenses = [] }) => {
               />
             </div>
 
-            <div className="flex items-center justify-between text-xs bg-slate-50 p-3 rounded-xl">
+            <div className="flex items-center justify-between text-xs bg-[#F1E7D6] p-3.5 rounded-2xl border border-[#DCCBB5]">
               <div>
-                <span className="text-slate-500">Amount Billed:</span>
-                <span className="font-bold text-slate-900 ml-1.5">
+                <span className="text-[#6B5140]">Amount Billed:</span>
+                <span className="font-extrabold text-[#C96F4A] ml-1.5">
                   ₹{Number(selectedReceipt.amount).toLocaleString()}
                 </span>
               </div>
@@ -131,7 +131,7 @@ export const ExpenseTable = ({ expenses = [] }) => {
                 href={selectedReceipt.receiptUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-600 hover:text-brand-800 font-semibold flex items-center gap-1"
+                className="text-[#C96F4A] hover:text-[#B85D3B] font-bold flex items-center gap-1 hover:underline"
               >
                 Open Full Document <ExternalLink className="w-3.5 h-3.5" />
               </a>
@@ -142,3 +142,5 @@ export const ExpenseTable = ({ expenses = [] }) => {
     </div>
   );
 };
+
+export default ExpenseTable;

@@ -29,11 +29,11 @@ const api = axios.create({
   },
 });
 
-// Request interceptor: attach token from localStorage if present
+// Request interceptor: attach token from localStorage if present and valid
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('crowdtrust_token');
-    if (token) {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('crowdtrust_token') : null;
+    if (token && token !== 'null' && token !== 'undefined' && token !== 'loggedout') {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -47,6 +47,16 @@ api.interceptors.response.use(
     return response.data;
   },
   (error) => {
+    if (error.response?.status === 401 && typeof window !== 'undefined') {
+      const isAuthRoute =
+        window.location.pathname.includes('/login') ||
+        window.location.pathname.includes('/register');
+      // If token is expired or invalid outside login/register forms, clear local token
+      if (!isAuthRoute && (error.response?.data?.message?.toLowerCase().includes('token') || error.response?.data?.message?.toLowerCase().includes('session') || error.response?.data?.message?.toLowerCase().includes('authentication required'))) {
+        localStorage.removeItem('crowdtrust_token');
+      }
+    }
+
     const message =
       error.response?.data?.message ||
       error.message ||

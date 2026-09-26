@@ -4,30 +4,31 @@ export const ProgressBar = ({
   percentage = 0,
   height = 'h-2.5',
   showLabel = false,
-  color = 'emerald',
+  color = 'terracotta',
   animated = true,
 }) => {
   const clamped = Math.max(0, Math.min(100, Math.round(percentage)));
 
   const colorVariants = {
-    emerald: 'bg-gradient-to-r from-emerald-500 to-teal-400 shadow-sm shadow-emerald-500/50',
-    trust: 'bg-gradient-to-r from-emerald-400 to-cyan-400 shadow-sm shadow-cyan-500/50',
-    brand: 'bg-gradient-to-r from-teal-500 to-emerald-400',
-    amber: 'bg-gradient-to-r from-amber-500 to-orange-400 shadow-sm shadow-orange-500/50',
-    cyan: 'bg-gradient-to-r from-cyan-500 to-blue-400',
+    terracotta: 'bg-gradient-to-r from-[#C96F4A] to-[#E8B89D]',
+    emerald: 'bg-gradient-to-r from-[#C96F4A] to-[#D9825E]',
+    trust: 'bg-gradient-to-r from-[#C96F4A] to-[#B85D3B]',
+    brand: 'bg-gradient-to-r from-[#C96F4A] to-[#E8B89D]',
+    amber: 'bg-gradient-to-r from-[#D97706] to-[#F59E0B]',
+    cyan: 'bg-gradient-to-r from-[#C96F4A] to-[#E8B89D]',
   };
 
-  const selectedColor = colorVariants[color] || colorVariants.emerald;
+  const selectedColor = colorVariants[color] || colorVariants.terracotta;
 
   return (
     <div className="w-full">
       {showLabel && (
-        <div className="flex justify-between items-center text-xs font-semibold text-slate-400 mb-1.5">
+        <div className="flex justify-between items-center text-xs font-bold text-[#6B5140] mb-1.5">
           <span>Funded Progress</span>
-          <span className="text-emerald-400 font-bold">{clamped}%</span>
+          <span className="text-[#C96F4A] font-extrabold">{clamped}%</span>
         </div>
       )}
-      <div className={`w-full bg-slate-950 rounded-full overflow-hidden ${height} border border-slate-800`}>
+      <div className={`w-full bg-[#EFE5D3] rounded-full overflow-hidden ${height} border border-[#DCCBB5]`}>
         <div
           className={`${height} rounded-full ${selectedColor} ${
             animated ? 'transition-all duration-700 ease-out' : ''

@@ -1,0 +1,251 @@
+.bell-toggle {
+  --bt-clip: 0px;
+  --bt-color: #3A2418;
+  --bt-bg: #FBF7EF;
+  --bt-on-color: #3A2418;
+  --bt-on-bg: #E8D5B7;
+  --bt-badge: #C96F4A;
+  --bt-badge-ink: #FBF7EF;
+  --bt-radius: 12px;
+  --bt-fade: 200ms;
+  --bt-pivot: 16%;
+  --bt-h: 40px;
+  --bt-fs: 13.5px;
+  --bt-icon: 18px;
+  --bt-px: 12px;
+  --bt-gap: 8px;
+  --bt-press: 0.96;
+  --bt-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: max-content;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: transform 160ms var(--bt-ease-out);
+}
+
+.bell-toggle[data-pressed] {
+  transform: scale(var(--bt-press));
+}
+
+.bell-toggle[data-disabled] {
+  opacity: 0.55;
+}
+
+.bell-toggle[data-disabled][data-pressed] {
+  transform: none;
+}
+
+.bell-toggle__button {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bt-gap);
+  height: var(--bt-h);
+  margin: 0;
+  padding: 0 var(--bt-px);
+  border: 1px solid #DCCBB5;
+  border-radius: var(--bt-radius);
+  background: var(--bt-bg);
+  color: var(--bt-color);
+  font: inherit;
+  font-size: var(--bt-fs);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  clip-path: inset(0 var(--bt-clip) 0 0 round var(--bt-radius));
+  transition:
+    background-color var(--bt-fade) ease,
+    border-color var(--bt-fade) ease,
+    color var(--bt-fade) ease,
+    box-shadow 180ms ease;
+}
+
+.bell-toggle--icon-only .bell-toggle__button {
+  width: var(--bt-h);
+  padding: 0;
+}
+
+.bell-toggle__button:disabled {
+  cursor: default;
+}
+
+.bell-toggle[data-on='true'] .bell-toggle__button {
+  background: var(--bt-on-bg);
+  color: var(--bt-on-color);
+  border-color: #C96F4A;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bell-toggle__button:enabled:hover {
+    background: #F1E7D6;
+    border-color: #C96F4A;
+    box-shadow: 0 4px 12px rgba(58, 36, 24, 0.08);
+  }
+
+  .bell-toggle[data-on='true'] .bell-toggle__button:enabled:hover {
+    background: #E8D5B7;
+    border-color: #C96F4A;
+  }
+}
+
+.bell-toggle__bell {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--bt-icon);
+  height: var(--bt-icon);
+}
+
+.bell-toggle__glyph {
+  display: inline-grid;
+  place-items: center;
+  grid-area: 1 / 1;
+  width: var(--bt-icon);
+  height: var(--bt-icon);
+  transform-origin: 50% var(--bt-pivot);
+}
+
+.bell-toggle__glyph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bell-toggle__clapper {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% var(--bt-pivot);
+  pointer-events: none;
+}
+
+.bell-toggle__clapper svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bell-toggle__wave {
+  position: absolute;
+  top: -3px;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #C96F4A;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bell-toggle__wave--left {
+  right: calc(100% - 2px);
+  transform-origin: 100% 100%;
+}
+
+.bell-toggle__wave--right {
+  left: calc(100% - 2px);
+  transform-origin: 0% 100%;
+}
+
+.bell-toggle__badge {
+  position: absolute;
+  top: -7px;
+  right: -8px;
+  display: grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  background: var(--bt-badge);
+  color: var(--bt-badge-ink);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(4px) scale(0.6);
+  pointer-events: none;
+  box-shadow: 0 0 0 2px #E8D5B7;
+  transition:
+    transform 180ms var(--bt-ease-out),
+    opacity 140ms ease;
+}
+
+.bell-toggle__badge[data-show] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 120ms ease;
+}
+
+.bell-toggle__digit {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 200ms ease,
+    transform 200ms var(--bt-ease-out);
+}
+
+@starting-style {
+  .bell-toggle__digit {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+.bell-toggle__say {
+  display: inline-grid;
+  grid-template-columns: max-content;
+  height: 18px;
+  line-height: 18px;
+}
+
+.bell-toggle__face {
+  grid-area: 1 / 1;
+  justify-self: start;
+  opacity: 0;
+  filter: blur(2px);
+  transition:
+    opacity var(--bt-fade) ease,
+    filter var(--bt-fade) ease;
+}
+
+.bell-toggle[data-on='false'] .bell-toggle__face--off,
+.bell-toggle[data-on='true'] .bell-toggle__face--on {
+  opacity: 1;
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bell-toggle[data-pressed] {
+    transform: none;
+  }
+
+  .bell-toggle__face {
+    filter: none !important;
+    transition: opacity var(--bt-fade) ease;
+  }
+
+  .bell-toggle__badge,
+  .bell-toggle__badge[data-show] {
+    transition: opacity 140ms ease;
+    transform: none;
+  }
+
+  .bell-toggle__digit {
+    transition: opacity 200ms ease;
+    transform: none;
+  }
+}

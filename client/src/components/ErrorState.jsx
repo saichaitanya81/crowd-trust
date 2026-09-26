@@ -10,15 +10,15 @@ export const ErrorState = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 text-center max-w-md mx-auto">
-      <div className="w-14 h-14 bg-rose-500/10 text-rose-400 rounded-2xl flex items-center justify-center mb-4 border border-rose-500/20">
+      <div className="w-14 h-14 bg-[#FDE8E8] text-[#9B1C1C] rounded-2xl flex items-center justify-center mb-4 border border-[#F8B4B4]">
         <Icon className="w-7 h-7" />
       </div>
-      <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
-      <p className="text-sm text-slate-400 mb-6">{message}</p>
+      <h3 className="text-lg font-bold text-[#3A2418] mb-2">{title}</h3>
+      <p className="text-sm text-[#6B5140] mb-6">{message}</p>
       {onRetry && (
         <button
           onClick={onRetry}
-          className="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-sm font-semibold transition"
+          className="btn-secondary inline-flex items-center space-x-2 text-xs py-2.5 px-4"
         >
           <RefreshCw className="w-4 h-4" />
           <span>{actionText}</span>

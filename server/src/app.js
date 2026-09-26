@@ -43,10 +43,12 @@ app.use(
 );
 
 // CORS configuration supporting production deployment and local development
-const configuredClientUrl = env.CLIENT_URL ? env.CLIENT_URL.trim().replace(/\/+$/, '') : null;
+const configuredClientUrls = (env.CLIENT_URL || '')
+  .split(',')
+  .map((url) => url.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
 
-const allowedOrigins = [
-  configuredClientUrl,
+const defaultAllowedOrigins = [
   'https://crowd-trust.vercel.app',
   'https://crowd-trust.onrender.com',
   'http://localhost:5173',
@@ -55,20 +57,24 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
   'http://127.0.0.1:3000',
-].filter(Boolean);
+];
+
+const allowedOrigins = Array.from(new Set([...configuredClientUrls, ...defaultAllowedOrigins]));
 
 const isAllowedOrigin = (origin) => {
-  if (!origin) return true; // Allow mobile apps, curl, Postman, server-to-server
+  if (!origin) return true; // Allow non-browser requests (mobile apps, curl, Postman, server-to-server)
   const normalized = origin.trim().replace(/\/+$/, '');
   if (allowedOrigins.includes(normalized)) return true;
-  if (/^https:\/\/crowd-trust.*\.vercel\.app$/.test(normalized)) return true;
+  if (/^https:\/\/.*\.vercel\.app$/.test(normalized)) return true;
+  if (/^https:\/\/.*\.onrender\.com$/.test(normalized)) return true;
+  if (/^https:\/\/.*\.netlify\.app$/.test(normalized)) return true;
   if (/^http:\/\/(localhost|127\.0\.0\.1):[0-9]+$/.test(normalized)) return true;
-  return true; // Dynamic permissive fallback with credentials header reflection
+  return true; // Dynamic permissive fallback with credentials reflection
 };
 
 const corsOptions = {
   origin: (origin, callback) => {
-    if (isAllowedOrigin(origin)) {
+    if (!origin || isAllowedOrigin(origin)) {
       callback(null, true);
     } else {
       callback(null, true);

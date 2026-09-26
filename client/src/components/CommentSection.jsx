@@ -59,9 +59,9 @@ export const CommentSection = ({ campaignId, creatorId }) => {
 
   return (
     <div className="card-container p-6 space-y-6">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-          <MessageSquare className="w-5 h-5 text-brand-600" />
+      <div className="flex items-center justify-between pb-3 border-b border-[#EADDCB]">
+        <h3 className="text-base font-bold text-[#3A2418] flex items-center gap-2">
+          <MessageSquare className="w-5 h-5 text-[#C96F4A]" />
           Community Discussion ({comments.length})
         </h3>
       </div>
@@ -73,7 +73,7 @@ export const CommentSection = ({ campaignId, creatorId }) => {
             <img
               src={user.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`}
               alt={user.name}
-              className="w-9 h-9 rounded-full border border-slate-200 mt-1 shrink-0"
+              className="w-9 h-9 rounded-full border border-[#DCCBB5] mt-1 shrink-0 object-cover"
             />
             <div className="flex-1">
               <textarea
@@ -81,7 +81,7 @@ export const CommentSection = ({ campaignId, creatorId }) => {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Ask a question or share encouragement with the project team..."
-                className="w-full p-3.5 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-xs text-slate-800 leading-relaxed"
+                className="w-full p-3.5 rounded-2xl border border-[#D6BFA0] bg-[#FBF7EF] focus:border-[#C96F4A] text-xs text-[#3A2418] leading-relaxed"
                 required
               />
             </div>
@@ -98,15 +98,15 @@ export const CommentSection = ({ campaignId, creatorId }) => {
           </div>
         </form>
       ) : (
-        <div className="p-4 rounded-xl bg-slate-50 text-center text-xs text-slate-600 border border-slate-200/60">
-          Please <a href="/login" className="text-brand-600 font-bold hover:underline">sign in</a> to participate in the project discussion.
+        <div className="p-4 rounded-xl bg-[#F1E7D6] text-center text-xs text-[#6B5140] border border-[#DCCBB5]">
+          Please <a href="/login" className="text-[#C96F4A] font-bold hover:underline">sign in</a> to participate in the project discussion.
         </div>
       )}
 
       {/* Comments List */}
-      <div className="space-y-4 divide-y divide-slate-100">
+      <div className="space-y-4 divide-y divide-[#EADDCB]">
         {comments.length === 0 ? (
-          <p className="text-xs text-slate-400 text-center py-6">
+          <p className="text-xs text-[#8A7463] text-center py-6">
             No comments yet. Be the first to share your thoughts!
           </p>
         ) : (
@@ -120,25 +120,25 @@ export const CommentSection = ({ campaignId, creatorId }) => {
                 <img
                   src={comment.user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${comment.user?.name || 'User'}`}
                   alt={comment.user?.name}
-                  className="w-8 h-8 rounded-full border border-slate-200 shrink-0 mt-0.5"
+                  className="w-8 h-8 rounded-full border border-[#DCCBB5] shrink-0 mt-0.5 object-cover"
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-900">
+                      <span className="text-xs font-bold text-[#3A2418]">
                         {comment.user?.name || 'Supporter'}
                       </span>
                       {isCreator && (
-                        <span className="badge bg-brand-100 text-brand-700 text-[10px] py-0 px-1.5">
+                        <span className="badge bg-[#F0DDC7] text-[#7A452F] text-[10px] py-0 px-1.5">
                           Campaign Organizer
                         </span>
                       )}
                       {comment.user?.role === 'admin' && (
-                        <span className="badge bg-purple-100 text-purple-700 text-[10px] py-0 px-1.5">
+                        <span className="badge bg-[#EFE5D3] text-[#3A2418] text-[10px] py-0 px-1.5">
                           Moderator
                         </span>
                       )}
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-[11px] text-[#8A7463]">
                         {new Date(comment.createdAt).toLocaleDateString()}
                       </span>
                     </div>
@@ -146,14 +146,14 @@ export const CommentSection = ({ campaignId, creatorId }) => {
                     {(isAuthor || isCreator || isAdmin) && (
                       <button
                         onClick={() => handleDelete(comment._id)}
-                        className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-rose-600 p-1 rounded transition"
+                        className="opacity-0 group-hover:opacity-100 text-[#8A7463] hover:text-[#B85D3B] p-1 rounded transition"
                         title="Delete comment"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     )}
                   </div>
-                  <p className="text-xs text-slate-700 mt-1 leading-relaxed whitespace-pre-line">
+                  <p className="text-xs text-[#6B5140] mt-1 leading-relaxed whitespace-pre-line">
                     {comment.content}
                   </p>
                 </div>
@@ -165,3 +165,5 @@ export const CommentSection = ({ campaignId, creatorId }) => {
     </div>
   );
 };
+
+export default CommentSection;

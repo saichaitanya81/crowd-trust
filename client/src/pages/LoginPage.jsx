@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Shield, Lock, Mail, ArrowRight, UserCheck, Stethoscope, HeartHandshake } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
+import WarmTooltip from '../components/WarmTooltip/WarmTooltip.jsx';
 
 export const LoginPage = () => {
   const { login, getDashboardPath } = useAuth();
@@ -38,106 +39,138 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-950">
+    <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[#F7F0E3] text-[#3A2418]">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2">
         <Link to="/" className="inline-flex items-center gap-2 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-slate-950 shadow-md font-bold">
-            <Shield className="w-5 h-5 fill-slate-950/20" />
+          <div className="w-10 h-10 rounded-xl bg-[#C96F4A] flex items-center justify-center text-[#FFF8EE] shadow-md font-bold">
+            <Shield className="w-5 h-5 fill-white/20" />
           </div>
-          <span className="font-bold text-2xl tracking-tight text-white">
-            Crowd<span className="text-emerald-400">Trust</span>
+          <span className="font-bold text-2xl tracking-tight text-[#3A2418]">
+            Crowd<span className="text-[#C96F4A]">Trust</span>
           </span>
         </Link>
-        <h2 className="text-2xl font-black text-white tracking-tight">Welcome Back</h2>
-        <p className="text-xs text-slate-400">Sign in to manage your campaigns, donations, and audited proofs.</p>
+        <h2 className="text-2xl font-black text-[#3A2418] tracking-tight">Welcome Back</h2>
+        <p className="text-xs text-[#6B5140]">Sign in to manage your campaigns, donations, and audited proofs.</p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="p-8 space-y-6 shadow-2xl rounded-2xl border border-slate-800/80 bg-slate-900/90 backdrop-blur-md">
+        <div className="p-8 space-y-6 shadow-warm-lg rounded-3xl border border-[#DCCBB5] bg-[#FBF7EF]">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-[#8A7463] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418] placeholder-[#9A8371] focus:border-[#C96F4A] transition"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-[#8A7463] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418] placeholder-[#9A8371] focus:border-[#C96F4A] transition"
                   required
                 />
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full py-3 text-xs font-bold shadow-lg shadow-emerald-500/20"
+            <WarmTooltip
+              content="Sign In"
+              side="top"
+              surfaceColor="#E8D5B7"
+              inkColor="#3A2418"
+              size="md"
+              radius={8}
+              gap={8}
+              arrow
+              popDuration={160}
+              popScale={0.94}
+              popBlur={4}
+              showFuse={false}
+              className="w-full"
             >
-              {loading ? 'Authenticating...' : 'Sign In'}
-            </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full py-3 text-xs font-bold shadow-lg shadow-[#C96F4A]/25"
+                aria-label="Sign In"
+              >
+                {loading ? 'Authenticating...' : 'Sign In'}
+              </button>
+            </WarmTooltip>
           </form>
 
           {/* Quick 1-Click Demo Accounts */}
-          <div className="pt-4 border-t border-slate-800 space-y-2">
-            <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider text-center">
+          <div className="pt-4 border-t border-[#EADDCB] space-y-2">
+            <span className="block text-[11px] font-bold text-[#8A7463] uppercase tracking-wider text-center">
               Quick 1-Click Demo Credentials
             </span>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => handleQuickLogin('admin@crowdtrust.org', 'Admin@12345#')}
-                className="p-2.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800/60 text-purple-300 text-center transition"
+                className="p-2.5 rounded-2xl bg-[#F0DDC7] hover:bg-[#E8D5B7] border border-[#DCCBB5] text-[#7A452F] text-center transition"
               >
-                <UserCheck className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+                <UserCheck className="w-4 h-4 text-[#C96F4A] mx-auto mb-1" />
                 <span className="block text-[10px] font-bold">Admin</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickLogin('aisha@ruralhealth.org', 'Creator@12345#')}
-                className="p-2.5 rounded-xl bg-teal-950/40 hover:bg-teal-900/60 border border-teal-800/60 text-teal-300 text-center transition"
+                className="p-2.5 rounded-2xl bg-[#F1E7D6] hover:bg-[#E8D5B7] border border-[#DCCBB5] text-[#6B5140] text-center transition"
               >
-                <Stethoscope className="w-4 h-4 text-teal-400 mx-auto mb-1" />
+                <Stethoscope className="w-4 h-4 text-[#C96F4A] mx-auto mb-1" />
                 <span className="block text-[10px] font-bold">Creator</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickLogin('priya@example.com', 'Donor@12345#')}
-                className="p-2.5 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-800/60 text-emerald-300 text-center transition"
+                className="p-2.5 rounded-2xl bg-[#E8F0DF] hover:bg-[#DBE8D0] border border-[#C8DCAE] text-[#3D5A2B] text-center transition"
               >
-                <HeartHandshake className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
+                <HeartHandshake className="w-4 h-4 text-[#4A6B3A] mx-auto mb-1" />
                 <span className="block text-[10px] font-bold">Donor</span>
               </button>
             </div>
           </div>
 
-          <div className="text-center text-xs text-slate-400 pt-2">
+          <div className="text-center text-xs text-[#6B5140] pt-2">
             Don't have an account yet?{' '}
-            <Link to="/register" className="font-bold text-emerald-400 hover:underline">
-              Create an account
-            </Link>
+            <WarmTooltip
+              content="Create an account"
+              side="top"
+              surfaceColor="#E8D5B7"
+              inkColor="#3A2418"
+              size="sm"
+              radius={8}
+              gap={8}
+              arrow
+              popDuration={160}
+              popScale={0.94}
+              popBlur={4}
+              showFuse={false}
+            >
+              <Link to="/register" className="font-bold text-[#C96F4A] hover:underline" aria-label="Create an account">
+                Create an account
+              </Link>
+            </WarmTooltip>
           </div>
         </div>
       </div>

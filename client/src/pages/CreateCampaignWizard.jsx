@@ -151,14 +151,14 @@ export const CreateCampaignWizard = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 bg-[#F7F0E3] text-[#3A2418]">
       {/* Wizard Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-bold text-brand-600 uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#C96F4A] uppercase tracking-wider">
             Campaign Creation Studio
           </span>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-0.5">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#3A2418] tracking-tight mt-0.5">
             Launch a Verified Initiative
           </h1>
         </div>
@@ -167,15 +167,15 @@ export const CreateCampaignWizard = () => {
         <button
           type="button"
           onClick={() => setIsAiDrawerOpen(true)}
-          className="btn-secondary text-xs py-2.5 px-4 gap-2 bg-gradient-to-r from-brand-50 to-sky-50 border-brand-200 text-brand-800 hover:border-brand-400 self-start sm:self-auto shadow-xs"
+          className="btn-secondary text-xs py-2.5 px-4 gap-2 bg-[#F0DDC7] border-[#DCCBB5] text-[#7A452F] hover:border-[#C96F4A] self-start sm:self-auto shadow-xs font-bold"
         >
-          <Sparkles className="w-4 h-4 text-brand-600" />
+          <Sparkles className="w-4 h-4 text-[#C96F4A]" />
           <span>AI Campaign Assistant</span>
         </button>
       </div>
 
       {/* Steps Indicator Bar */}
-      <div className="card-container p-4 bg-white overflow-x-auto">
+      <div className="card-container p-4 bg-[#FBF7EF] overflow-x-auto">
         <div className="flex items-center justify-between min-w-[550px] gap-2">
           {stepsHeader.map((s, idx) => (
             <React.Fragment key={s.num}>
@@ -183,19 +183,19 @@ export const CreateCampaignWizard = () => {
                 onClick={() => setStep(s.num)}
                 className={`flex items-center gap-2 cursor-pointer transition ${
                   step === s.num
-                    ? 'text-brand-600 font-bold'
+                    ? 'text-[#C96F4A] font-bold'
                     : step > s.num
-                    ? 'text-emerald-600 font-medium'
-                    : 'text-slate-400 font-normal'
+                    ? 'text-[#3D5A2B] font-semibold'
+                    : 'text-[#8A7463] font-normal'
                 }`}
               >
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-xs ${
                     step === s.num
-                      ? 'bg-brand-600 text-white font-bold'
+                      ? 'bg-[#C96F4A] text-[#FFF8EE] font-bold shadow-xs'
                       : step > s.num
-                      ? 'bg-emerald-100 text-emerald-800'
-                      : 'bg-slate-100 text-slate-500'
+                      ? 'bg-[#E8F0DF] text-[#3D5A2B] font-bold'
+                      : 'bg-[#F1E7D6] text-[#8A7463]'
                   }`}
                 >
                   {step > s.num ? <CheckCircle2 className="w-4 h-4" /> : s.num}
@@ -205,7 +205,7 @@ export const CreateCampaignWizard = () => {
               {idx < stepsHeader.length - 1 && (
                 <div
                   className={`h-0.5 flex-1 mx-2 rounded ${
-                    step > idx + 1 ? 'bg-emerald-400' : 'bg-slate-200'
+                    step > idx + 1 ? 'bg-[#C8DCAE]' : 'bg-[#DCCBB5]'
                   }`}
                 />
               )}
@@ -215,16 +215,16 @@ export const CreateCampaignWizard = () => {
       </div>
 
       {/* Main Wizard Form Card */}
-      <div className="card-container p-6 sm:p-10 space-y-8 bg-white shadow-card">
+      <div className="card-container p-6 sm:p-10 space-y-8 bg-[#FBF7EF] shadow-warm">
         {/* STEP 1: Basic Info */}
         {step === 1 && (
           <div className="space-y-5 animate-fade-in">
-            <h3 className="text-lg font-bold text-slate-900 pb-2 border-b">
+            <h3 className="text-lg font-bold text-[#3A2418] pb-2 border-b border-[#EADDCB]">
               Step 1: Campaign Title & Description
             </h3>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Campaign Title
               </label>
               <input
@@ -232,20 +232,20 @@ export const CreateCampaignWizard = () => {
                 placeholder="e.g. Mobile Medical Clinics for Remote Mountain Villages"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-brand-500"
+                className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-sm font-bold text-[#3A2418] focus:border-[#C96F4A]"
                 required
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   Category
                 </label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs font-medium text-slate-900 bg-white"
+                  className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] text-xs font-bold text-[#3A2418] bg-[#FBF7EF]"
                 >
                   {categories.map((c) => (
                     <option key={c} value={c}>
@@ -256,7 +256,7 @@ export const CreateCampaignWizard = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   Project Location
                 </label>
                 <input
@@ -264,14 +264,14 @@ export const CreateCampaignWizard = () => {
                   placeholder="e.g. Chamoli, Uttarakhand"
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                  className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Short Elevator Summary (280 chars max)
               </label>
               <textarea
@@ -280,13 +280,13 @@ export const CreateCampaignWizard = () => {
                 placeholder="Concise 1-2 sentence overview shown in campaign cards..."
                 value={formData.shortDescription}
                 onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
-                className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                className="w-full p-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Detailed Campaign Proposal
               </label>
               <textarea
@@ -294,7 +294,7 @@ export const CreateCampaignWizard = () => {
                 placeholder="Describe the context, urgency, implementation roadmap, and how funds will be deployed..."
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full p-3.5 rounded-xl border border-slate-300 text-xs text-slate-900 leading-relaxed"
+                className="w-full p-3.5 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418] leading-relaxed"
                 required
               />
             </div>
@@ -304,13 +304,13 @@ export const CreateCampaignWizard = () => {
         {/* STEP 2: Funding & Deadline */}
         {step === 2 && (
           <div className="space-y-5 animate-fade-in">
-            <h3 className="text-lg font-bold text-slate-900 pb-2 border-b">
+            <h3 className="text-lg font-bold text-[#3A2418] pb-2 border-b border-[#EADDCB]">
               Step 2: Funding Target & Timeline
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   Target Funding Goal (INR ₹)
                 </label>
                 <input
@@ -318,27 +318,27 @@ export const CreateCampaignWizard = () => {
                   min="100"
                   value={formData.goalAmount}
                   onChange={(e) => setFormData({ ...formData, goalAmount: Number(e.target.value) })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-black text-slate-900"
+                  className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-sm font-black text-[#C96F4A]"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   Campaign End Deadline
                 </label>
                 <input
                   type="date"
                   value={formData.deadline}
                   onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                  className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Direct Beneficiary Name / Target Community
               </label>
               <input
@@ -346,7 +346,7 @@ export const CreateCampaignWizard = () => {
                 placeholder="e.g. 500 High School Girls in West Bengal or Chamoli Village Collective"
                 value={formData.beneficiary}
                 onChange={(e) => setFormData({ ...formData, beneficiary: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 required
               />
             </div>
@@ -356,13 +356,13 @@ export const CreateCampaignWizard = () => {
         {/* STEP 3: Story & Impact Details */}
         {step === 3 && (
           <div className="space-y-5 animate-fade-in">
-            <h3 className="text-lg font-bold text-slate-900 pb-2 border-b">
+            <h3 className="text-lg font-bold text-[#3A2418] pb-2 border-b border-[#EADDCB]">
               Step 3: Story Pillars & Objective
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   The Problem / Urgent Need
                 </label>
                 <textarea
@@ -372,12 +372,12 @@ export const CreateCampaignWizard = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, story: { ...formData.story, problem: e.target.value } })
                   }
-                  className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                  className="w-full p-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   The Proposed Solution
                 </label>
                 <textarea
@@ -387,14 +387,14 @@ export const CreateCampaignWizard = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, story: { ...formData.story, solution: e.target.value } })
                   }
-                  className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                  className="w-full p-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   Target Beneficiaries Count
                 </label>
                 <textarea
@@ -407,12 +407,12 @@ export const CreateCampaignWizard = () => {
                       story: { ...formData.story, beneficiaries: e.target.value },
                     })
                   }
-                  className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                  className="w-full p-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                   Expected Measurable Outcomes
                 </label>
                 <textarea
@@ -425,7 +425,7 @@ export const CreateCampaignWizard = () => {
                       story: { ...formData.story, expectedImpact: e.target.value },
                     })
                   }
-                  className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                  className="w-full p-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 />
               </div>
             </div>
@@ -435,12 +435,12 @@ export const CreateCampaignWizard = () => {
         {/* STEP 4: Media */}
         {step === 4 && (
           <div className="space-y-5 animate-fade-in">
-            <h3 className="text-lg font-bold text-slate-900 pb-2 border-b">
+            <h3 className="text-lg font-bold text-[#3A2418] pb-2 border-b border-[#EADDCB]">
               Step 4: Campaign Cover Image & Gallery
             </h3>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Cover Image URL
               </label>
               <input
@@ -448,13 +448,13 @@ export const CreateCampaignWizard = () => {
                 value={formData.coverImage}
                 onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                 required
               />
             </div>
 
             {formData.coverImage && (
-              <div className="aspect-video max-w-md rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
+              <div className="aspect-video max-w-md rounded-2xl overflow-hidden bg-[#EFE5D3] border border-[#DCCBB5]">
                 <img
                   src={formData.coverImage}
                   alt="Cover Preview"
@@ -464,7 +464,7 @@ export const CreateCampaignWizard = () => {
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#3A2418] uppercase tracking-wider mb-1.5">
                 Project Video URL (Optional YouTube / Vimeo)
               </label>
               <input
@@ -472,7 +472,7 @@ export const CreateCampaignWizard = () => {
                 value={formData.videoUrl}
                 onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
                 placeholder="https://youtube.com/..."
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 text-xs text-slate-900"
+                className="w-full px-4 py-3 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
               />
             </div>
           </div>
@@ -481,10 +481,10 @@ export const CreateCampaignWizard = () => {
         {/* STEP 5: Itemized Budget Plan */}
         {step === 5 && (
           <div className="space-y-5 animate-fade-in">
-            <div className="flex items-center justify-between pb-2 border-b">
+            <div className="flex items-center justify-between pb-2 border-b border-[#EADDCB]">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Step 5: Itemized Budget Plan</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="text-lg font-bold text-[#3A2418]">Step 5: Itemized Budget Plan</h3>
+                <p className="text-xs text-[#6B5140]">
                   Total Budget: ₹{totalBudget.toLocaleString()} / Goal Target: ₹
                   {formData.goalAmount.toLocaleString()}
                 </p>
@@ -502,13 +502,13 @@ export const CreateCampaignWizard = () => {
               {formData.budget.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center"
+                  className="p-4 rounded-2xl bg-[#F1E7D6] border border-[#DCCBB5] grid grid-cols-1 sm:grid-cols-12 gap-3 items-center"
                 >
                   <div className="sm:col-span-4">
                     <select
                       value={item.category}
                       onChange={(e) => handleBudgetChange(idx, 'category', e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs bg-white font-medium"
+                      className="w-full px-3 py-2 rounded-xl border border-[#D6BFA0] text-xs bg-[#FBF7EF] font-bold text-[#3A2418]"
                     >
                       <option value="Equipment">Equipment</option>
                       <option value="Materials">Materials</option>
@@ -527,7 +527,7 @@ export const CreateCampaignWizard = () => {
                       value={item.amount}
                       onChange={(e) => handleBudgetChange(idx, 'amount', e.target.value)}
                       placeholder="Amount ₹"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs font-bold"
+                      className="w-full px-3 py-2 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs font-black text-[#C96F4A]"
                     />
                   </div>
 
@@ -537,7 +537,7 @@ export const CreateCampaignWizard = () => {
                       value={item.description}
                       onChange={(e) => handleBudgetChange(idx, 'description', e.target.value)}
                       placeholder="Item description"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs"
+                      className="w-full px-3 py-2 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                     />
                   </div>
 
@@ -545,7 +545,7 @@ export const CreateCampaignWizard = () => {
                     <button
                       type="button"
                       onClick={() => handleRemoveBudgetItem(idx)}
-                      className="p-2 text-slate-400 hover:text-rose-600 rounded-lg transition"
+                      className="p-2 text-[#8A7463] hover:text-[#B85D3B] rounded-lg transition"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -559,10 +559,10 @@ export const CreateCampaignWizard = () => {
         {/* STEP 6: Milestones */}
         {step === 6 && (
           <div className="space-y-5 animate-fade-in">
-            <div className="flex items-center justify-between pb-2 border-b">
+            <div className="flex items-center justify-between pb-2 border-b border-[#EADDCB]">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Step 6: Progressive Milestones</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="text-lg font-bold text-[#3A2418]">Step 6: Progressive Milestones</h3>
+                <p className="text-xs text-[#6B5140]">
                   Escrow installments released sequentially upon verified proof. Total: ₹
                   {totalMilestones.toLocaleString()}
                 </p>
@@ -580,16 +580,16 @@ export const CreateCampaignWizard = () => {
               {formData.milestones.map((m, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3"
+                  className="p-4 rounded-2xl bg-[#F1E7D6] border border-[#DCCBB5] space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-500 uppercase">
+                    <span className="text-xs font-bold text-[#6B5140] uppercase">
                       Milestone {idx + 1}
                     </span>
                     <button
                       type="button"
                       onClick={() => handleRemoveMilestone(idx)}
-                      className="text-slate-400 hover:text-rose-600 p-1"
+                      className="text-[#8A7463] hover:text-[#B85D3B] p-1"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -601,14 +601,14 @@ export const CreateCampaignWizard = () => {
                       placeholder="Milestone Title"
                       value={m.title}
                       onChange={(e) => handleMilestoneChange(idx, 'title', e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs font-bold"
+                      className="w-full px-3 py-2 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs font-bold text-[#3A2418]"
                     />
                     <input
                       type="number"
                       placeholder="Target Funding Allocation ₹"
                       value={m.targetAmount}
                       onChange={(e) => handleMilestoneChange(idx, 'targetAmount', e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-300 text-xs font-bold"
+                      className="w-full px-3 py-2 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs font-bold text-[#C96F4A]"
                     />
                   </div>
 
@@ -617,7 +617,7 @@ export const CreateCampaignWizard = () => {
                     placeholder="Describe deliverable and verification proof..."
                     value={m.description}
                     onChange={(e) => handleMilestoneChange(idx, 'description', e.target.value)}
-                    className="w-full p-2.5 rounded-lg border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#D6BFA0] bg-[#FBF7EF] text-xs text-[#3A2418]"
                   />
                 </div>
               ))}
@@ -628,33 +628,33 @@ export const CreateCampaignWizard = () => {
         {/* STEP 7: Review & Submit */}
         {step === 7 && (
           <div className="space-y-6 animate-fade-in">
-            <div className="flex items-center justify-between pb-3 border-b">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EADDCB]">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Step 7: Final Review & Submission</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="text-lg font-bold text-[#3A2418]">Step 7: Final Review & Submission</h3>
+                <p className="text-xs text-[#6B5140]">
                   Check all details before submitting for official compliance review.
                 </p>
               </div>
-              <span className="badge bg-emerald-100 text-emerald-800">
-                <ShieldCheck className="w-3.5 h-3.5 mr-1" />
+              <span className="badge bg-[#F0DDC7] text-[#7A452F]">
+                <ShieldCheck className="w-3.5 h-3.5 mr-1 text-[#C96F4A]" />
                 Ready to Publish
               </span>
             </div>
 
             <div className="space-y-4 text-xs">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="text-slate-500 block">Title:</span>
-                <p className="font-bold text-sm text-slate-900 mt-0.5">{formData.title}</p>
-                <span className="text-slate-500 block mt-2">Category & Goal:</span>
-                <p className="font-bold text-slate-800">
+              <div className="p-4 rounded-2xl bg-[#F1E7D6] border border-[#DCCBB5]">
+                <span className="text-[#6B5140] block">Title:</span>
+                <p className="font-bold text-sm text-[#3A2418] mt-0.5">{formData.title}</p>
+                <span className="text-[#6B5140] block mt-2">Category & Goal:</span>
+                <p className="font-bold text-[#3A2418]">
                   {formData.category} • Target: ₹{formData.goalAmount.toLocaleString()} • Budget:{' '}
                   ₹{totalBudget.toLocaleString()}
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="text-slate-500 block">Milestones ({formData.milestones.length}):</span>
-                <ul className="list-disc list-inside mt-1 space-y-1 font-medium text-slate-700">
+              <div className="p-4 rounded-2xl bg-[#F1E7D6] border border-[#DCCBB5]">
+                <span className="text-[#6B5140] block">Milestones ({formData.milestones.length}):</span>
+                <ul className="list-disc list-inside mt-1 space-y-1 font-semibold text-[#3A2418]">
                   {formData.milestones.map((m, i) => (
                     <li key={i}>
                       {m.title} (₹{Number(m.targetAmount).toLocaleString()})
@@ -663,7 +663,7 @@ export const CreateCampaignWizard = () => {
                 </ul>
               </div>
 
-              <div className="p-4 rounded-xl bg-brand-50 border border-brand-200 text-brand-900 leading-relaxed">
+              <div className="p-4 rounded-2xl bg-[#F0DDC7] border border-[#DCCBB5] text-[#7A452F] font-semibold leading-relaxed">
                 By submitting this campaign, you agree to upload transparent vendor bills for every milestone release under CrowdTrust verification protocols.
               </div>
             </div>
@@ -671,7 +671,7 @@ export const CreateCampaignWizard = () => {
         )}
 
         {/* Navigation Buttons */}
-        <div className="flex items-center justify-between pt-6 border-t border-slate-200">
+        <div className="flex items-center justify-between pt-6 border-t border-[#DCCBB5]">
           {step > 1 ? (
             <button
               type="button"
@@ -703,7 +703,7 @@ export const CreateCampaignWizard = () => {
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="btn-primary text-xs py-3 px-8 gap-2 bg-emerald-600 hover:bg-emerald-700 font-bold shadow-md"
+              className="btn-primary text-xs py-3 px-8 gap-2 font-bold shadow-md"
             >
               <CheckCircle2 className="w-4 h-4" />
               {submitting ? 'Submitting Campaign...' : 'Submit Campaign For Review'}
@@ -723,3 +723,5 @@ export const CreateCampaignWizard = () => {
     </div>
   );
 };
+
+export default CreateCampaignWizard;
