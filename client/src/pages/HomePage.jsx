@@ -197,66 +197,82 @@ export const HomePage = () => {
     >
       <div className="space-y-20 pb-20 overflow-hidden bg-[#F7F0E3] text-[#3A2418]">
         {/* 1. Hero Section */}
-        <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32 overflow-hidden bg-gradient-to-b from-[#FBF7EF] via-[#F7F0E3] to-[#F7F0E3] border-b border-[#DCCBB5]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          {/* Trust Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F0DDC7] border border-[#D6BFA0] shadow-sm mb-6 text-xs font-bold text-[#7A452F] animate-fade-in">
-            <span className="flex h-2 w-2 rounded-full bg-[#C96F4A] animate-ping" />
-            <ShieldCheck className="w-4 h-4 text-[#C96F4A]" />
-            <span>The 100% Audited Crowdfunding Standard</span>
+        <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32 overflow-hidden border-b border-[#DCCBB5]">
+          {/* Background Image Layer */}
+          <img
+            src="/images/crowdtrust-hero-bg.png"
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-0 opacity-45 select-none"
+          />
+
+          {/* Warm Cream / Almond Theme Overlay */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-[#FBF7EF]/90 via-[#F7F0E3]/92 to-[#F7F0E3]"
+          />
+
+          {/* Hero Content */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[2] text-center">
+            {/* Trust Pill */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F0DDC7] border border-[#D6BFA0] shadow-sm mb-6 text-xs font-bold text-[#7A452F] animate-fade-in">
+              <span className="flex h-2 w-2 rounded-full bg-[#C96F4A] animate-ping" />
+              <ShieldCheck className="w-4 h-4 text-[#C96F4A]" />
+              <span>The 100% Audited Crowdfunding Standard</span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-6xl font-black text-[#3A2418] tracking-tight leading-[1.15] max-w-4xl mx-auto">
+              Fund Ideas. Build Trust.{' '}
+              <span className="text-[#C96F4A]">
+                Create Impact.
+              </span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="mt-6 text-base sm:text-lg text-[#6B5140] max-w-2xl mx-auto leading-relaxed">
+              CrowdTrust is the transparent crowdfunding platform where every rupee is backed by verified creator identities, milestone escrow releases, and itemized invoice audits.
+            </p>
+
+            {/* Hero CTAs */}
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/creator/campaigns/new"
+                className="btn-primary w-full sm:w-auto text-sm py-3.5 px-8 gap-2 shadow-lg shadow-[#C96F4A]/25"
+              >
+                <span>Start a Campaign</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/campaigns"
+                className="btn-secondary w-full sm:w-auto text-sm py-3.5 px-8"
+              >
+                Explore Verified Campaigns
+              </Link>
+            </div>
+
+            {/* Trust Guarantees Row */}
+            <div className="mt-14 pt-8 border-t border-[#DCCBB5] max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-[#3A2418]">
+              <div className="flex items-center justify-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
+                <span>Identity Verified</span>
+              </div>
+              <div className="flex items-center justify-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
+                <span>Milestone Escrow</span>
+              </div>
+              <div className="flex items-center justify-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
+                <span>Receipt Audits</span>
+              </div>
+              <div className="flex items-center justify-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
+                <span>Zero Fake Claims</span>
+              </div>
+            </div>
           </div>
-
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl font-black text-[#3A2418] tracking-tight leading-[1.15] max-w-4xl mx-auto">
-            Fund Ideas. Build Trust.{' '}
-            <span className="text-[#C96F4A]">
-              Create Impact.
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="mt-6 text-base sm:text-lg text-[#6B5140] max-w-2xl mx-auto leading-relaxed">
-            CrowdTrust is the transparent crowdfunding platform where every rupee is backed by verified creator identities, milestone escrow releases, and itemized invoice audits.
-          </p>
-
-          {/* Hero CTAs */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/creator/campaigns/new"
-              className="btn-primary w-full sm:w-auto text-sm py-3.5 px-8 gap-2 shadow-lg shadow-[#C96F4A]/25"
-            >
-              <span>Start a Campaign</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/campaigns"
-              className="btn-secondary w-full sm:w-auto text-sm py-3.5 px-8"
-            >
-              Explore Verified Campaigns
-            </Link>
-          </div>
-
-          {/* Trust Guarantees Row */}
-          <div className="mt-14 pt-8 border-t border-[#DCCBB5] max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-[#3A2418]">
-            <div className="flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
-              <span>Identity Verified</span>
-            </div>
-            <div className="flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
-              <span>Milestone Escrow</span>
-            </div>
-            <div className="flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
-              <span>Receipt Audits</span>
-            </div>
-            <div className="flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#C96F4A] shrink-0" />
-              <span>Zero Fake Claims</span>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* Trusted Organizations LogoLoop Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6">
