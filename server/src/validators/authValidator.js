@@ -32,6 +32,6 @@ export const updateProfileSchema = {
     bio: z.string().max(500).optional(),
     phone: z.string().optional(),
     location: z.string().optional(),
-    avatar: z.string().optional(),
+    avatar: z.string().nullable().optional(),
   }),
 };

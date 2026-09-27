@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, Filter, SlidersHorizontal, ShieldCheck, RefreshCw, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, SlidersHorizontal, ShieldCheck, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
 import api from '../services/api.js';
 import { CampaignGrid } from '../components/CampaignGrid.jsx';
+import { CAMPAIGNS_DATA, filterCampaigns } from '../data/campaignsData.js';
 
 export const CampaignsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const [campaigns, setCampaigns] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [meta, setMeta] = useState({ page: 1, totalPages: 1, total: 0 });
 
   // Filter states initialized from URL params
   const [search, setSearch] = useState(searchParams.get('search') || '');
@@ -20,6 +17,10 @@ export const CampaignsPage = () => {
   const [location, setLocation] = useState(searchParams.get('location') || '');
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [showFiltersMobile, setShowFiltersMobile] = useState(false);
+
+  const [campaigns, setCampaigns] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [meta, setMeta] = useState({ page: 1, totalPages: 1, total: 0 });
 
   const categories = [
     'All',
@@ -33,9 +34,35 @@ export const CampaignsPage = () => {
     'Startup',
   ];
 
-  const fetchCampaigns = async () => {
+  // Sync state to URL params cleanly without infinite rerenders
+  const updateUrlParams = useCallback((newParams) => {
+    const params = new URLSearchParams();
+    if (newParams.search) params.set('search', newParams.search);
+    if (newParams.category && newParams.category !== 'All') params.set('category', newParams.category);
+    if (newParams.status && newParams.status !== 'all') params.set('status', newParams.status);
+    if (newParams.verifiedOnly) params.set('verifiedOnly', 'true');
+    if (newParams.location) params.set('location', newParams.location);
+    if (newParams.sort && newParams.sort !== 'recent') params.set('sort', newParams.sort);
+    if (newParams.page && newParams.page > 1) params.set('page', newParams.page.toString());
+    setSearchParams(params, { replace: true });
+  }, [setSearchParams]);
+
+  const fetchCampaigns = useCallback(async () => {
+    setLoading(true);
+
+    // Compute local result dynamically from the unified master CAMPAIGNS_DATA array
+    const localResult = filterCampaigns(CAMPAIGNS_DATA, {
+      search,
+      category,
+      status,
+      verifiedOnly,
+      location,
+      sort,
+      page,
+      limit: 9,
+    });
+
     try {
-      setLoading(true);
       const params = {
         page,
         limit: 9,
@@ -48,20 +75,37 @@ export const CampaignsPage = () => {
       if (location.trim()) params.location = location.trim();
 
       const res = await api.get('/campaigns', { params });
-      if (res.success) {
-        setCampaigns(res.data.campaigns || []);
-        if (res.meta) setMeta(res.meta);
+      if (res?.success && Array.isArray(res?.data?.campaigns) && res.data.campaigns.length > 0) {
+        const serverCampaigns = res.data.campaigns;
+        // Merge server custom campaigns with master dataset if any new user campaigns exist
+        const serverIds = new Set(serverCampaigns.map((c) => c.slug || c._id || c.id));
+        const combined = [
+          ...serverCampaigns,
+          ...localResult.campaigns.filter((c) => !serverIds.has(c.slug) && !serverIds.has(c._id) && !serverIds.has(c.id)),
+        ];
+        setCampaigns(combined.slice(0, 9));
+        setMeta({
+          page,
+          totalPages: Math.max(res.meta?.totalPages || 1, localResult.meta.totalPages),
+          total: Math.max(res.meta?.total || 0, localResult.meta.total),
+        });
+      } else {
+        setCampaigns(localResult.campaigns);
+        setMeta(localResult.meta);
       }
-    } catch (err) {
-      console.error('Failed to fetch campaigns:', err);
+    } catch {
+      // Fallback directly to local filtered campaigns
+      setCampaigns(localResult.campaigns);
+      setMeta(localResult.meta);
     } finally {
       setLoading(false);
     }
-  };
+  }, [search, category, status, verifiedOnly, location, sort, page]);
 
   useEffect(() => {
+    updateUrlParams({ search, category, status, verifiedOnly, location, sort, page });
     fetchCampaigns();
-  }, [search, category, status, verifiedOnly, sort, location, page]);
+  }, [search, category, status, verifiedOnly, location, sort, page, updateUrlParams, fetchCampaigns]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();

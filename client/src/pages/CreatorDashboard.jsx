@@ -22,6 +22,7 @@ import { VerificationBadge } from '../components/VerificationBadge.jsx';
 import { ProgressBar } from '../components/ProgressBar.jsx';
 import { EmptyState } from '../components/EmptyState.jsx';
 import { TableSkeleton } from '../components/LoadingSkeleton.jsx';
+import { ProfileAvatarEditor } from '../components/ProfileAvatarEditor.jsx';
 
 export const CreatorDashboard = () => {
   const { user } = useAuth();
@@ -104,11 +105,7 @@ export const CreatorDashboard = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#DCCBB5]">
         <div className="flex items-center gap-4">
-          <img
-            src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.name}`}
-            alt={user?.name}
-            className="w-16 h-16 rounded-2xl border-2 border-[#DCCBB5] shadow-xs object-cover"
-          />
+          <ProfileAvatarEditor size="lg" />
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-2xl sm:text-3xl font-black text-[#3A2418] tracking-tight">

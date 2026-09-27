@@ -19,6 +19,7 @@ const sendTokenResponse = (user, statusCode, res, message = 'Success') => {
     httpOnly: true,
     secure: isProduction,
     sameSite: isProduction ? 'none' : 'lax',
+    path: '/',
   };
 
   res.cookie('jwt', token, cookieOptions);
@@ -104,6 +105,7 @@ export const logout = (req, res) => {
     httpOnly: true,
     secure: isProduction,
     sameSite: isProduction ? 'none' : 'lax',
+    path: '/',
   });
   return sendSuccess(res, 200, 'Logged out successfully');
 };
@@ -125,7 +127,7 @@ export const updateProfile = async (req, res, next) => {
     if (bio !== undefined) updates.bio = bio;
     if (phone !== undefined) updates.phone = phone;
     if (location !== undefined) updates.location = location;
-    if (avatar) updates.avatar = avatar;
+    if (avatar !== undefined) updates.avatar = avatar || '';
 
     const user = await User.findByIdAndUpdate(req.user._id, updates, {
       new: true,

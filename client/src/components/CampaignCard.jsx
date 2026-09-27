@@ -8,22 +8,42 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 export const CampaignCard = ({ campaign, index = 0 }) => {
   const { isBookmarked, toggleBookmark } = useAuth();
-  const bookmarked = isBookmarked(campaign._id);
+  const campaignId = campaign?._id || campaign?.id;
+  const bookmarked = isBookmarked(campaignId);
 
-  const percentage = campaign.percentageRaised || (campaign.goalAmount ? Math.min(100, Math.round((campaign.raisedAmount / campaign.goalAmount) * 100)) : 0);
-  const daysLeft = campaign.daysRemaining !== undefined ? campaign.daysRemaining : (() => {
-    if (!campaign.deadline) return 0;
-    const diff = new Date(campaign.deadline).getTime() - Date.now();
-    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-  })();
+  const percentage =
+    campaign?.percentageRaised !== undefined
+      ? campaign.percentageRaised
+      : campaign?.goalAmount
+      ? Math.min(100, Math.round(((campaign.raisedAmount || 0) / campaign.goalAmount) * 100))
+      : 0;
+
+  const daysLeft =
+    campaign?.daysRemaining !== undefined
+      ? campaign.daysRemaining
+      : campaign?.daysLeft !== undefined
+      ? campaign.daysLeft
+      : (() => {
+          if (!campaign?.deadline) return 0;
+          const diff = new Date(campaign.deadline).getTime() - Date.now();
+          return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+        })();
 
   const handleBookmarkClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleBookmark(campaign._id);
+    if (campaignId) {
+      toggleBookmark(campaignId);
+    }
   };
 
   const delay = Math.min((index % 6) * 0.08, 0.4);
+  const imageSrc =
+    campaign?.coverImage ||
+    campaign?.image ||
+    'https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80';
+  const verificationStatus =
+    campaign?.verificationStatus || (campaign?.verified ? 'verified' : 'unverified');
 
   return (
     <motion.div
@@ -50,8 +70,8 @@ export const CampaignCard = ({ campaign, index = 0 }) => {
       {/* Image & Badges */}
       <div className="relative aspect-video w-full overflow-hidden bg-[#EFE5D3]">
         <img
-          src={campaign.coverImage || 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80'}
-          alt={campaign.title}
+          src={imageSrc}
+          alt={campaign?.title || 'Campaign'}
           className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
           loading="lazy"
         />
@@ -60,11 +80,11 @@ export const CampaignCard = ({ campaign, index = 0 }) => {
         {/* Top Badges */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
           <span className="badge bg-[#FBF7EF]/90 text-[#3A2418] border border-[#DCCBB5] backdrop-blur-md">
-            {campaign.category}
+            {campaign?.category || 'General'}
           </span>
           <button
             onClick={handleBookmarkClick}
-            className={`pointer-events-auto p-2 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 ${
+            className={`pointer-events-auto p-2 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ${
               bookmarked
                 ? 'bg-[#C96F4A] text-[#FFF8EE] shadow-md'
                 : 'bg-[#2C1810]/60 text-[#EADDCB] hover:text-[#FFF8EE] hover:bg-[#2C1810]/90'
@@ -77,7 +97,7 @@ export const CampaignCard = ({ campaign, index = 0 }) => {
 
         {/* Verification Status Overlay */}
         <div className="absolute bottom-3 left-3 z-20 transition-transform duration-300 group-hover:scale-[1.02]">
-          <VerificationBadge status={campaign.verificationStatus || 'verified'} size="sm" />
+          <VerificationBadge status={verificationStatus} size="sm" />
         </div>
       </div>
 
@@ -87,19 +107,19 @@ export const CampaignCard = ({ campaign, index = 0 }) => {
           {/* Location & Beneficiary */}
           <div className="flex items-center gap-1 text-[11px] text-[#8A7463] group-hover:text-[#6B5140] font-semibold mb-1.5 truncate transition-colors duration-200">
             <MapPin className="w-3 h-3 text-[#C96F4A] shrink-0" />
-            <span className="truncate">{campaign.location}</span>
+            <span className="truncate">{campaign?.location || 'India'}</span>
           </div>
 
           {/* Campaign Title */}
-          <Link to={`/campaigns/${campaign.slug || campaign._id}`}>
+          <Link to={`/campaigns/${campaign?.slug || campaign?._id || campaign?.id}`}>
             <h3 className="text-base font-bold text-[#3A2418] group-hover:text-[#C96F4A] transition-colors duration-200 line-clamp-2 leading-snug">
-              {campaign.title}
+              {campaign?.title}
             </h3>
           </Link>
 
           {/* Short Description */}
           <p className="text-xs text-[#6B5140] group-hover:text-[#3A2418] mt-2 line-clamp-2 leading-relaxed transition-colors duration-200">
-            {campaign.shortDescription}
+            {campaign?.shortDescription || campaign?.description}
           </p>
         </div>
 
@@ -112,10 +132,10 @@ export const CampaignCard = ({ campaign, index = 0 }) => {
           <div className="flex items-baseline justify-between mb-3">
             <div>
               <span className="text-sm font-extrabold text-[#C96F4A]">
-                ₹{Number(campaign.raisedAmount || 0).toLocaleString()}
+                ₹{Number(campaign?.raisedAmount || 0).toLocaleString()}
               </span>
               <span className="text-xs text-[#8A7463] ml-1">
-                raised of ₹{Number(campaign.goalAmount || 0).toLocaleString()}
+                raised of ₹{Number(campaign?.goalAmount || 0).toLocaleString()}
               </span>
             </div>
             <span className="text-xs font-bold text-[#3A2418]">{percentage}%</span>
@@ -125,7 +145,7 @@ export const CampaignCard = ({ campaign, index = 0 }) => {
           <div className="flex items-center justify-between text-xs text-[#8A7463] pt-2 border-t border-[#EADDCB]/80">
             <div className="flex items-center gap-1.5 transition-colors duration-200 group-hover:text-[#6B5140]">
               <Users className="w-3.5 h-3.5 text-[#6B5140] group-hover:text-[#C96F4A] transition-colors duration-200" />
-              <span>{campaign.donorCount || 0} donors</span>
+              <span>{campaign?.donorCount || 0} donors</span>
             </div>
             <div className="flex items-center gap-1.5 transition-colors duration-200 group-hover:text-[#6B5140]">
               <Clock className="w-3.5 h-3.5 text-[#6B5140] group-hover:text-[#C96F4A] transition-colors duration-200" />

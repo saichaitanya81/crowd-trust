@@ -26,6 +26,7 @@ import ClickSpark from '../components/ClickSpark.jsx';
 import AnimatedContent from '../components/AnimatedContent.jsx';
 import FadeContent from '../components/FadeContent.jsx';
 import { LogoLoop } from '../components/LogoLoop.jsx';
+import { CAMPAIGNS_DATA } from '../data/campaignsData.js';
 
 export const HomePage = () => {
   const [stats, setStats] = useState({
@@ -114,11 +115,14 @@ export const HomePage = () => {
         if (statsRes?.success) {
           setStats(statsRes.data);
         }
-        if (featuredRes?.success) {
-          setFeaturedCampaigns(featuredRes.data.campaigns || []);
+        if (featuredRes?.success && featuredRes.data.campaigns?.length > 0) {
+          setFeaturedCampaigns(featuredRes.data.campaigns);
+        } else {
+          setFeaturedCampaigns(CAMPAIGNS_DATA.filter((c) => c.isFeatured).slice(0, 3));
         }
       } catch (err) {
         console.error('Failed to load homepage stats:', err);
+        setFeaturedCampaigns(CAMPAIGNS_DATA.filter((c) => c.isFeatured).slice(0, 3));
       } finally {
         setLoading(false);
       }

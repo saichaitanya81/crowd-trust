@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Shield, PlusCircle, User, LogOut, Bookmark, Menu, X, LayoutDashboard, ChevronDown, LogIn, UserPlus } from 'lucide-react';
+import { PlusCircle, User, LogOut, Bookmark, Menu, X, LayoutDashboard, ChevronDown, LogIn, UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { NotificationBell } from './NotificationBell.jsx';
 import { PillNav } from './PillNav.jsx';
 import Dock from './Dock.jsx';
+import { Logo } from './Logo.jsx';
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout, getDashboardPath } = useAuth();
@@ -43,19 +44,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#C96F4A] to-[#E8B89D] flex items-center justify-center shadow-sm text-[#FFF8EE] group-hover:scale-105 transition duration-200">
-              <Shield className="w-5 h-5 fill-white/20" />
-            </div>
-            <div>
-              <span className="font-bold text-xl tracking-tight text-[#3A2418] flex items-center gap-1">
-                Crowd<span className="text-[#C96F4A]">Trust</span>
-              </span>
-              <span className="hidden sm:block text-[10px] text-[#6B5140] font-semibold tracking-wide uppercase">
-                Verified • Transparent
-              </span>
-            </div>
-          </Link>
+          <Logo size="md" />
 
           {/* Desktop PillNav Navigation */}
           <div className="hidden md:flex items-center">
@@ -90,9 +79,13 @@ export const Navbar = () => {
                   className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-[#DFCCA9] transition focus:outline-none"
                 >
                   <img
-                    src={user.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`}
+                    src={user.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user.name || 'User')}`}
                     alt={user.name}
                     className="w-8 h-8 rounded-full border border-[#DCCBB5] object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user.name || 'User')}`;
+                    }}
                   />
                   <span className="text-xs font-bold text-[#3A2418] max-w-[100px] truncate">
                     {user.name.split(' ')[0]}

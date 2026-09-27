@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, ShieldCheck, Mail, Globe, Share2 } from 'lucide-react';
+import { ShieldCheck, Mail, Globe, Share2 } from 'lucide-react';
+import { Logo } from './Logo.jsx';
 
 export const Footer = () => {
   return (
@@ -9,14 +10,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-[#C96F4A] flex items-center justify-center text-[#FFF8EE] shadow-sm font-bold">
-                <Shield className="w-5 h-5 fill-white/20" />
-              </div>
-              <span className="font-bold text-xl tracking-tight text-[#FFF8EE]">
-                Crowd<span className="text-[#C96F4A]">Trust</span>
-              </span>
-            </Link>
+            <Logo size="md" variant="dark" />
             <p className="text-sm text-[#CBB4A0] leading-relaxed max-w-sm">
               The next-generation transparent crowdfunding ecosystem. We combine identity verification, milestone escrow releases, itemized expense audits, and measurable real-world outcomes.
             </p>

@@ -18,6 +18,7 @@ import { useToast } from '../context/ToastContext.jsx';
 import { CampaignCard } from '../components/CampaignCard.jsx';
 import { EmptyState } from '../components/EmptyState.jsx';
 import { TableSkeleton, DashboardStatsSkeleton } from '../components/LoadingSkeleton.jsx';
+import { ProfileAvatarEditor } from '../components/ProfileAvatarEditor.jsx';
 
 export const DonorDashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -83,11 +84,7 @@ export const DonorDashboard = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#DCCBB5]">
         <div className="flex items-center gap-4">
-          <img
-            src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.name}`}
-            alt={user?.name}
-            className="w-16 h-16 rounded-2xl border-2 border-[#DCCBB5] shadow-xs object-cover"
-          />
+          <ProfileAvatarEditor size="lg" />
           <div>
             <h1 className="text-2xl sm:text-3xl font-black text-[#3A2418] tracking-tight">
               {user?.name}
@@ -278,7 +275,15 @@ export const DonorDashboard = () => {
       {activeTab === 'profile' && (
         <div className="max-w-2xl">
           <div className="card-container p-6 sm:p-8 space-y-6 bg-[#FBF7EF] border border-[#DCCBB5]">
-            <h3 className="text-base font-bold text-[#3A2418]">Update Profile Details</h3>
+            <div className="flex items-center gap-4 pb-5 border-b border-[#DCCBB5]">
+              <ProfileAvatarEditor size="xl" />
+              <div>
+                <h3 className="text-base font-bold text-[#3A2418]">Profile Photo & Details</h3>
+                <p className="text-xs text-[#8A7463] mt-0.5">
+                  Click the camera icon on your avatar to upload or customize your photo.
+                </p>
+              </div>
+            </div>
 
             <form onSubmit={handleProfileSubmit} className="space-y-4">
               <div>

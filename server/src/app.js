@@ -89,6 +89,7 @@ const corsOptions = {
 
 // CORS must be mounted first to handle all cross-origin requests and preflights
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Security Headers
 app.use(

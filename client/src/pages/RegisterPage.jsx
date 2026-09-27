@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Shield, Lock, Mail, User, Phone, MapPin, CheckCircle2, HeartHandshake, Sparkles } from 'lucide-react';
+import { Lock, Mail, User, Phone, MapPin, CheckCircle2, HeartHandshake, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import WarmTooltip from '../components/WarmTooltip/WarmTooltip.jsx';
 import SpotlightCard from '../components/SpotlightCard/SpotlightCard.jsx';
+import { Logo } from '../components/Logo.jsx';
 
 export const RegisterPage = () => {
   const [searchParams] = useSearchParams();
@@ -67,14 +68,9 @@ export const RegisterPage = () => {
   return (
     <div className="min-h-[85vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8 auth-page-bg text-[#3A2418] relative">
       <div className="sm:mx-auto sm:w-full sm:max-w-lg text-center space-y-2 relative z-10">
-        <Link to="/" className="inline-flex items-center gap-2 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-[#C96F4A] flex items-center justify-center text-[#FFF8EE] shadow-md font-bold">
-            <Shield className="w-5 h-5 fill-white/20" />
-          </div>
-          <span className="font-bold text-2xl tracking-tight text-[#3A2418]">
-            Crowd<span className="text-[#C96F4A]">Trust</span>
-          </span>
-        </Link>
+        <div className="mb-2 flex justify-center">
+          <Logo size="lg" />
+        </div>
         <h2 className="text-2xl font-black text-[#3A2418] tracking-tight">Create Your Account</h2>
         <p className="text-xs text-[#6B5140]">
           Join a community dedicated to verified, transparent social impact.
